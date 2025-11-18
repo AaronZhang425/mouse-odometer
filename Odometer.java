@@ -42,11 +42,21 @@ public class Odometer {
             //     new File("/dev/input/event2")
             // );
             
-            reader.read(buffer);
+            // reader.read(buffer);
 
-            for (byte elem : buffer) {
-                System.out.print(elem + ", ");
+
+            while (true) { 
+                reader.read(buffer);
+
+                for (byte input : buffer) {
+                    System.out.print(input + ", ");
+                }
+
+                System.out.println();
+
             }
+
+
             // BufferedReader reader = (
             //     new BufferedReader(
             //         new FileReader(mouse.getMouseHandlerFile()),
