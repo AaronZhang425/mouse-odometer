@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-// import java.util.stream.Stream;
 public final class Mouse {
 
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
@@ -32,9 +31,7 @@ public final class Mouse {
 
         }
 
-        // System.out.println(filePath);
         mouseHandlerFile = filePath;
-        // System.out.println(mouseHandlerFile);
 
         if (!mouseHandlerFile.exists()) {
             System.out.println("Inputted handler file cannot be found");

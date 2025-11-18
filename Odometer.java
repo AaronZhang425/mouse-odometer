@@ -2,9 +2,6 @@ import java.io.IOException;
 
 import java.io.File;
 import java.io.FileInputStream;
-// import java.io.InputStream;
-// import java.io.BufferedReader;
-// import java.io.FileReader;
 
 public class Odometer {
     Mouse mouse;
@@ -15,8 +12,6 @@ public class Odometer {
     }
     
     public Odometer(int dpi, int eventNum) {
-        // this.dpi = dpi;
-        // mouse = new Mouse(eventNum);
         this(dpi, new File("/dev/input/event" + eventNum));
 
     }
@@ -33,17 +28,10 @@ public class Odometer {
     public void eventFileReader() {
         try {
             byte[] buffer = new byte[24];
-            // final int BUFFER = 4;
 
             FileInputStream reader = new FileInputStream(
                 mouse.getMouseHandlerFile()
             );
-            // FileInputStream reader = new FileInputStream(
-            //     new File("/dev/input/event2")
-            // );
-            
-            // reader.read(buffer);
-
 
             while (true) { 
                 reader.read(buffer);
@@ -55,19 +43,6 @@ public class Odometer {
                 System.out.println();
 
             }
-
-
-            // BufferedReader reader = (
-            //     new BufferedReader(
-            //         new FileReader(mouse.getMouseHandlerFile()),
-            //         BUFFER
-            //     )
-            // );
-
-            // reader.lines().toArray();
-
-
-
             
         } catch (IOException error) {
             System.out.println(error);
