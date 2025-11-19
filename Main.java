@@ -5,8 +5,17 @@ public class Main {
         // System.out.println(mouse.getMouseHandlerFile());
         
         Odometer odometer = new Odometer(1000, 2);
-        odometer.eventFileReader();
+        while (true) {
+            byte[] buffer = odometer.eventFileReader();
 
+            for (byte elem : buffer) {
+                System.out.print(elem + ", ");
+
+            }
+
+            System.out.println();
+
+        }
 
     }
 

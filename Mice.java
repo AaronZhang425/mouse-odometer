@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public final class Mouse {
+public final class Mice {
 
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
     private File mouseHandlerFile;
 
-    public Mouse(int eventNum) {
+    public Mice(int eventNum) {
         this(new File("/dev/input/event" + eventNum));
 
     }
 
-    public Mouse(String filePath) {
+    public Mice(String filePath) {
         this(new File(filePath));
     }
 
-    public Mouse(File filePath) {
+    public Mice(File filePath) {
         if (isWindows()) {
             System.out.println("This app cannot run on windows.");
             return;
@@ -45,7 +45,7 @@ public final class Mouse {
 
     }
 
-    public Mouse() {
+    public Mice() {
         if (isWindows()) {
             System.out.println("This app cannot run on windows.");
             return;
@@ -97,7 +97,9 @@ public final class Mouse {
 
     public List<String> readDeviceList() {
         try {
-            BufferedReader reader = (new BufferedReader(new FileReader(INPUT_DEVICE_INFO)));
+            BufferedReader reader = new BufferedReader(
+                    new FileReader(INPUT_DEVICE_INFO)
+            );
 
             return reader.lines().toList();
 

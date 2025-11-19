@@ -25,30 +25,35 @@ public class Odometer {
         mouse = new Mouse(file);
     }
 
-    public void eventFileReader() {
+    public byte[] eventFileReader() {
+        byte[] buffer = new byte[24];
+        
         try {
-            byte[] buffer = new byte[24];
 
             FileInputStream reader = new FileInputStream(
                 mouse.getMouseHandlerFile()
             );
 
-            while (true) { 
-                reader.read(buffer);
+    
+            reader.read(buffer);
 
-                for (byte input : buffer) {
-                    System.out.print(input + ", ");
-                }
+            // while (true) { 
+            //     reader.read(buffer);
 
-                System.out.println();
+            //     for (byte input : buffer) {
+            //         System.out.print(input + ", ");
+            //     }
 
-            }
+            //     System.out.println();
+
+            // }
             
         } catch (IOException error) {
             System.out.println(error);
 
         }
-
+        
+        return buffer;
 
 
     }
