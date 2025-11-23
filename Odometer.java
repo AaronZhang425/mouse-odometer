@@ -31,17 +31,15 @@ public class Odometer {
         // Loop backwards for big endian and push bigest byte left
         long microSeconds = 0;
         for (byte i = 7; i >= 4; i--) {
-            // bitshift by byte
-            microSeconds <<= 8;
-            // addition by bits, not by signed int value
-            microSeconds += buffer[i];
+            //bit shift by 1 byte to the left and bit mask buffer
+            microSeconds = (microSeconds << 8) | (buffer[i] & 0xFF);
         }
 
         long seconds = 0;
         for (byte i = 3; i >= 0; i--) {
-            
-            seconds <<= 8;
-            seconds += buffer[i];
+            // seconds <<= 8;
+            // seconds += buffer[i];
+            seconds = (seconds << 8) | (buffer[i] & 0xFF);
         }
     
 
