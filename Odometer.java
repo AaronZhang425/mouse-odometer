@@ -10,12 +10,12 @@ public class Odometer {
     public Odometer(int dpi) {
         this.dpi = dpi;
     }
-    
+
     public Odometer(int dpi, int eventNum) {
         this(dpi, new File("/dev/input/event" + eventNum));
 
     }
-    
+
     public Odometer(int dpi, String filePath) {
         this(dpi, new File(filePath));
     }
@@ -34,66 +34,71 @@ public class Odometer {
 
     }
 
-
     public Time getEventTime(byte[] buffer) {
-        long microSeconds = 0;
-        for (byte i = 15; i >= 8; i--) {
-            System.out.print(Integer.toBinaryString(buffer[i]) + " ");
-            microSeconds = (microSeconds << 8) | (buffer[i] & 0xFF);
-        }
-        
-        long seconds = 0;
-        for (byte i = 7; i >= 0; i--) {
-            // seconds <<= 8;
-            // seconds += buffer[i];
-            seconds = (seconds << 8) | (buffer[i] & 0xFF);
-        }
-    
-        System.out.println();
-        System.out.print(Long.toBinaryString(microSeconds));
+        long microSeconds = byteArrayToUnsignedLong(
+            buffer,
+            (byte) 8,
+            (byte) 15
+        );
+
+        long seconds = byteArrayToUnsignedLong(
+            buffer,
+            (byte) 0,
+            (byte) 7
+        );
+
         return new Time(seconds, microSeconds);
     }
-
-    // public int byteArrayToInt() {
-        
-    //     int
-
-    // }
-
+    
     public byte[] eventFileReader() {
         byte[] buffer = new byte[24];
         
         try {
-
+            
             FileInputStream reader = new FileInputStream(
-                mice.getMouseHandlerFile()
-            );
-
-    
+            mice.getMouseHandlerFile());
+            
             reader.read(buffer);
             reader.close();
-
-            // while (true) { 
-            //     reader.read(buffer);
-
-            //     for (byte input : buffer) {
-            //         System.out.print(input + ", ");
-            //     }
-
-            //     System.out.println();
-
-            // }
             
+            // while (true) {
+                // reader.read(buffer);
+                
+                // for (byte input : buffer) {
+                    // System.out.print(input + ", ");
+                    // }
+                    
+                    // System.out.println();
+                    
+                    // }
+                    
         } catch (IOException error) {
             System.out.println(error);
-
+            
         }
         
-
         return buffer;
+                    
+    }
+                
 
+    private long byteArrayToUnsignedLong(
+        byte[] buffer,
+        byte startIdx,
+        byte endIdx
+    ) {
+    
+        long unsingedLong = 0;
+        
+        for(byte i = endIdx; i >= startIdx; i--) {
+            unsingedLong = (unsingedLong << 8) | (buffer[i] & 0xFF);
+        }
+
+        return unsingedLong;
 
     }
+
+
 
 
 }
