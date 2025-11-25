@@ -1,2 +1,1 @@
-// to be implemented
 public record EventData(Time time, int type, int eventCode, int value) {}
