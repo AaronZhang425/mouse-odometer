@@ -1,1 +1,1 @@
-public record EventData(Time time, int type, int eventCode, int value) {}
+public record EventData(Time time, int type, EventCodes eventCode, int value) {}

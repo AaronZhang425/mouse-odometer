@@ -34,23 +34,29 @@ public class Odometer {
         int value = byteArrayToInt(buffer, 20, 23);
 
         return new EventData(
-            getEventTime(buffer), type, eventCode, value
+            getEventTime(buffer), type, EventCodes.MAX, value
         );
 
     }
 
     private Time getEventTime(byte[] buffer) {
-        long microSeconds = byteArrayToLong(
-            buffer,
-            8,
-            15
-        );
+        // long microSeconds = byteArrayToLong(
+        //     buffer,
+        //     8,
+        //     15
+        // );
 
-        long seconds = byteArrayToLong(
-            buffer,
-            0,
-            7
-        );
+        long microSeconds = ByteArrayConverson.toLong(buffer, 15, 8);
+
+
+
+        // long seconds = byteArrayToLong(
+        //     buffer,
+        //     0,
+        //     7
+        // );
+
+        long seconds = ByteArrayConverson.toLong(buffer, 7, 0);
 
 
         return new Time(seconds, microSeconds);

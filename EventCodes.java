@@ -14,10 +14,16 @@ public enum EventCodes {
     MAX(0x1f),
     CNT(EventCodes.MAX.getEventCode() + 1);
     
-    private final int eventCode;
+    private int eventCode;
 
     private EventCodes(int eventCode) {
         this.eventCode = eventCode;
+    }
+
+    private EventCodes(byte[] arr) {
+        for (byte i = 0; i < arr.length; i++) {
+            eventCode = (eventCode << 8) | (arr[i] & 0xFF);
+        }
     }
 
     public int getEventCode() {
