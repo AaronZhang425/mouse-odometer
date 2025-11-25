@@ -69,6 +69,18 @@ public class KernalInputDevices {
 
     }
 
+    public String getPossibleEvents(String line) {
+        String regex = ".*Ev=[0-9]+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(line);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+
+        return "";
+    }
+
     public List<String> readDeviceList() {
         try {
             BufferedReader reader = new BufferedReader(

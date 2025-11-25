@@ -97,7 +97,7 @@ public final class Mice {
     }
 
     public void findEventNum(String line) {
-        String regEx = "event[0-9]*";
+        String regEx = "event[0-9]+";
         Pattern eventRegEx = Pattern.compile(regEx);
         Matcher matcher = eventRegEx.matcher(line);
 
