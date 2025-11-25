@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.util.HashMap;
+// import java.util.HashMap;
 
 
 public class KernalInputDevices {
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
-    private HashMap<String, File> devices;
+    private InputDevice devices;
     
     public KernalInputDevices() {
         System.out.println("Hi");
     }
 
-    public HashMap<String, File> update() {
+    public InputDevice update() {
         List<String> lines = readDeviceList();
 
         for (int i = 0; i < lines.size(); i++) {
@@ -52,7 +52,7 @@ public class KernalInputDevices {
 
 
 
-        return new HashMap<>();
+        return new InputDevice();
 
     }
 
