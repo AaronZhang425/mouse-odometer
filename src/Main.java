@@ -7,7 +7,7 @@ public class Main {
         // System.out.println(mouse.getMouseHandlerFile());
         
         
-        Odometer odometer = new Odometer(1000, 2);
+        Odometer odometer = new Odometer(1000, 5);
         while (true) {
             // long[] time = odometer.getEventTime();
             EventData inputData = odometer.getEventData();

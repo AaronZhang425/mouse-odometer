@@ -23,6 +23,8 @@ public class KernalInputDevices {
     public ArrayList<InputDevice> update() {
         List<String> lines = readDeviceList();
 
+        ArrayList<InputDevice> devices = new ArrayList<InputDevice>();
+
         for (int i = 0; i < lines.size(); i++) {
             
 
