@@ -14,13 +14,13 @@ import java.util.regex.Matcher;
 
 public class KernalInputDevices {
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
-    private InputDevice devices;
+    private ArrayList<InputDevice> devices;
     
     public KernalInputDevices() {
         System.out.println("Hi");
     }
 
-    public InputDevice update() {
+    public ArrayList<InputDevice> update() {
         List<String> lines = readDeviceList();
 
         for (int i = 0; i < lines.size(); i++) {
@@ -52,7 +52,7 @@ public class KernalInputDevices {
 
 
 
-        return new InputDevice();
+        return new ArrayList<>();
 
     }
 
