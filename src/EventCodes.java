@@ -12,22 +12,36 @@ public enum EventCodes {
     PWR(0x16),
     FF_STATUS(0x17),
     MAX(0x1f),
-    CNT(EventCodes.MAX.getEventCode() + 1);
+    CNT(EventCodes.MAX.getEventCode() + 1),
+    NONE(-1);
     
-    private int eventCode;
+    private int eventCodeValue;
 
-    private EventCodes(int eventCode) {
-        this.eventCode = eventCode;
+    private EventCodes(int eventCodeValue) {
+        this.eventCodeValue = eventCodeValue;
     }
 
     private EventCodes(byte[] arr) {
-        for (byte i = 0; i < arr.length; i++) {
-            eventCode = (eventCode << 8) | (arr[i] & 0xFF);
+        eventCodeValue = ByteArrayConverson.toInt(arr);
+    }
+
+    private EventCodes(byte[] arr, int startIdx, int endIdx) {
+        eventCodeValue = ByteArrayConverson.toInt(arr, startIdx, endIdx);
+    }
+
+    public EventCodes getEventCodeByValue(int value) {
+        for (EventCodes eventCode : EventCodes.values()) {
+            if (eventCode.getEventCode() == value) {
+                return eventCode;
+            }
         }
+
+        return EventCodes.NONE;
+        
     }
 
     public int getEventCode() {
-        return eventCode;
+        return eventCodeValue;
     }
 
 }
