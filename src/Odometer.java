@@ -31,11 +31,14 @@ public class Odometer {
 
         getEventTime(buffer);
         int type = ByteArrayConverson.toInt(buffer, 17, 16);
-        int eventCode = ByteArrayConverson.toInt(buffer, 18, 19);
+        int eventTypeValue = ByteArrayConverson.toInt(buffer, 18, 19);
         int value = ByteArrayConverson.toInt(buffer, 20, 23);
 
         return new EventData(
-            getEventTime(buffer), type, EventCodes.MAX, value
+            getEventTime(buffer),
+            type,
+            EventTypes.MAX,
+            value
         );
 
     }
