@@ -6,7 +6,7 @@ public enum EventTypes {
             SYN_MT_REPORT(2),
             SYN_DROPPED(3),
             SYN_MAX(4),
-            SYN_CNT(5);
+            SYN_CNT(EventCodes.SYN_MAX.getEventCodeValue() + 1);
 
             int eventCodeValue;
 
@@ -29,7 +29,31 @@ public enum EventTypes {
 
     EV_REL(0x02) {
         enum EventCodes {
-            
+            REL_X(0),
+            REL_Y(1),
+            REL_Z(2),
+            REL_RX(3),
+            REL_RY(4),
+            REL_RZ(5),
+            REL_HWWEEL(6),
+            REL_DIAL(7),
+            REL_WHEEL(8),
+            REL_MISC(9),
+            REL_RESERVED(10),
+            REL_WHEEL_HI_RES(11),
+            REL_HWEEL_HI_RES(12),
+            REL_MAX(16),
+            REL_CNT(EventCodes.REL_MAX.getEventCodeValue() + 1);
+
+            int eventCodeValue;
+
+            EventCodes(int eventCodeValue) {
+                this.eventCodeValue = eventCodeValue;
+            }
+
+            int getEventCodeValue() {
+                return eventCodeValue;
+            }           
         }
     },
 
