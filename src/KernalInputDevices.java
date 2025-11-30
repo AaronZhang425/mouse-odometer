@@ -82,7 +82,7 @@ public class KernalInputDevices {
 
         String ev = matcher.group(0);
         
-        int bitMask = 0;
+        int bitMap = 0;
         
         int index = ev.length() - 1;
         int bitShiftAmount = 0;
@@ -91,14 +91,14 @@ public class KernalInputDevices {
         
         while (index >= 0) {
             num = Character.digit(ev.charAt(index), 16);
-            bitMask |= (num << 4 * bitShiftAmount);
+            bitMap |= (num << 4 * bitShiftAmount);
             
             index--;
             bitShiftAmount++;
             
         }
         
-        return "" + bitMask;
+        return "" + bitMap;
     }
 
     public List<String> readDeviceList() {
