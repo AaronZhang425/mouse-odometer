@@ -1,3 +1,5 @@
+import EventCodes.*;
+
 public enum EventTypes {
     SYN(0x00),
     KEY(0x01),
@@ -11,8 +13,6 @@ public enum EventTypes {
     FF(0x15),
     PWR(0x16),
     FF_STATUS(0x17),
-    MAX(0x1f),
-    CNT(EventTypes.MAX.getEventCode() + 1),
     NONE(-1);
 
     private int eventTypeValue;

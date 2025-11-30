@@ -72,16 +72,33 @@ public class KernalInputDevices {
     }
 
     public String getPossibleEvents(String line) {
-        String regex = "(?<=Ev=)[0-9]+";
+        String regex = "(?<=EV=)[0-9]+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
+
+        if (!matcher.find()) {
+            return null;
+        } 
+
+        String ev = matcher.group(0);
         
-        if (matcher.find()) {
-            return matcher.group(1);
+        int bitMask = 0;
+        
+        int index = ev.length() - 1;
+        int bitShiftAmount = 0;
+        
+        int num;
+        
+        while (index >= 0) {
+            num = Character.digit(ev.charAt(index), 16);
+            bitMask |= (num << 4 * bitShiftAmount);
+            
+            index--;
+            bitShiftAmount++;
+            
         }
-
-
-        return "";
+        
+        return "" + bitMask;
     }
 
     public List<String> readDeviceList() {

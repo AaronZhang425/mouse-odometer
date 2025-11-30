@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+import javax.swing.event.DocumentEvent.EventType;
+
+import EventCodes.Rel;
+
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -36,8 +40,8 @@ public class Odometer {
 
         return new EventData(
             getEventTime(buffer),
-            type,
-            EventTypes.MAX,
+            EventTypes.REL,
+            Rel.X,
             value
         );
 
