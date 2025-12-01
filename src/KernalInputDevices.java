@@ -12,49 +12,39 @@ import java.util.regex.Matcher;
 import EventCodes.EventCode;
 // import java.util.HashMap;
 
-
 public class KernalInputDevices {
+
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
     private ArrayList<InputDevice> devices;
-    
+
     public KernalInputDevices() {
-        System.out.println("Hi");
+        System.out.println("Test message");
     }
 
     public ArrayList<InputDevice> update() {
         List<String> lines = readDeviceList();
 
-        ArrayList<InputDevice> devices = new ArrayList<InputDevice>();
+        ArrayList<InputDevice> devices = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {
-            
+            String line = lines.get(i).toLowerCase();
 
+            int[] id;
 
+            if (line.startsWith("i:")) {
+                id = getDeviceId(line);
+            }
 
         }
 
-
         // String regex = "\"([^\"]*)\"";
-        
         // Pattern pattern = Pattern.compile(regex);
-        
-        
         // for (int i = 0; i < lines.size(); i++) {
         //     Matcher matcher = pattern.matcher(lines.get(i));
-
         //     if(matcher.find()) {
         //         System.out.group(1);
         //     }
-
-
-
-            
-        
         // }
-
-
-
-
         return new ArrayList<>();
 
     }
@@ -73,7 +63,7 @@ public class KernalInputDevices {
     }
 
     // to be implemented
-    public int[] getDeviceId() {
+    public int[] getDeviceId(String line) {
         return new int[4];
     }
 
@@ -84,24 +74,24 @@ public class KernalInputDevices {
 
         if (!matcher.find()) {
             return null;
-        } 
+        }
 
         String ev = matcher.group(0);
-        
+
         int bitMap = 0;
-        
+
         int index = ev.length() - 1;
         int bitShiftAmount = 0;
-        
+
         int num;
-        
+
         while (index >= 0) {
             num = Character.digit(ev.charAt(index), 16);
             bitMap |= (num << 4 * bitShiftAmount);
-            
+
             index--;
             bitShiftAmount++;
-            
+
         }
 
         ArrayList<Integer> indices = new ArrayList<>();
@@ -120,20 +110,16 @@ public class KernalInputDevices {
         for (int i = 0; i < indices.size(); i++) {
             possibleEvents[i] = EventTypes.getEventTypeByValue(indices.get(i));
         }
-        
+
         return possibleEvents;
     }
 
     public List<String> readDeviceList() {
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new FileReader(INPUT_DEVICE_INFO)
-            );
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(INPUT_DEVICE_INFO)
+        )) {
 
-            List<String> lines = reader.lines().toList();
-            reader.close();
-
-            return lines;
+            return reader.lines().toList();
 
         } catch (IOException error) {
             System.out.println(INPUT_DEVICE_INFO + " cannnot be read");

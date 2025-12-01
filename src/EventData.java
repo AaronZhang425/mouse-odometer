@@ -1,7 +1,7 @@
 import EventCodes.EventCode;
 
 public record EventData(
-    Time time,
+    long[] time,
     EventTypes eventType,
     EventCode eventCode,
     int value

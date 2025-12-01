@@ -22,13 +22,13 @@ public class Main {
             
             System.out.println();
 
-            System.out.println(inputData.time().seconds());
+            System.out.println(inputData.time()[0]);
             
             Instant now = Instant.now();
             System.out.println(now.getEpochSecond());
-            System.out.println(now.getEpochSecond() - inputData.time().seconds());
+            System.out.println(now.getEpochSecond() - inputData.time()[0]);
 
-            long microSeconds = inputData.time().microSeconds();
+            long microSeconds = inputData.time()[1];
  
             System.out.println(microSeconds);
             System.out.println(now.getNano() / 1000);

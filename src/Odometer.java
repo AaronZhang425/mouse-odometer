@@ -33,7 +33,6 @@ public class Odometer {
     public EventData getEventData() {
         byte[] buffer = eventFileReader();
 
-        getEventTime(buffer);
         int type = ByteArrayConverson.toInt(buffer, 17, 16);
         int eventTypeValue = ByteArrayConverson.toInt(buffer, 18, 19);
         int value = ByteArrayConverson.toInt(buffer, 20, 23);
@@ -47,7 +46,7 @@ public class Odometer {
 
     }
 
-    private Time getEventTime(byte[] buffer) {
+    private long[] getEventTime(byte[] buffer) {
         long microSeconds = ByteArrayConverson.toLong(
             buffer,
             15,
@@ -60,8 +59,8 @@ public class Odometer {
             0
         );
 
-
-        return new Time(seconds, microSeconds);
+        long[] time = {seconds, microSeconds};
+        return time;
     }
     
     public byte[] eventFileReader() {
