@@ -40,8 +40,7 @@ public enum Rel implements EventId {
 
     }           
 
-    @Override
-    public EventId fromValue(int value) {
+    public static EventId fromValue(int value) {
         return VALUE_MAP.get(value);
     }
 

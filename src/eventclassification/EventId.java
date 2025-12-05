@@ -1,7 +1,7 @@
 package eventclassification;
 
 public interface EventId {
-    int getValue();
-    EventId fromValue(int value);
+    public int getValue();
+    // public abstract EventId fromValue(int value) ;
     
 }
