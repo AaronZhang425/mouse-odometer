@@ -18,7 +18,7 @@ public enum Rel implements EventId {
     WHEEL_HI_RES(11),
     HWHEEL_HI_RES(12);
 
-    private final int eventCodeValue;
+    private final int value;
     private static final HashMap<Integer, Rel> VALUE_MAP;
 
     static {
@@ -30,13 +30,13 @@ public enum Rel implements EventId {
 
     }
 
-    private Rel(int eventCodeValue) {
-        this.eventCodeValue = eventCodeValue;
+    private Rel(int value) {
+        this.value = value;
     }
 
     @Override
     public int getValue(){
-        return eventCodeValue;
+        return value;
 
     }           
 
