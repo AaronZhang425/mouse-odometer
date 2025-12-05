@@ -1,6 +1,7 @@
 package eventclassification.eventcodes;
 
 import eventclassification.EventId;
+import java.util.HashMap;
 
 public enum Rel implements EventId {
     X(0),
@@ -18,6 +19,16 @@ public enum Rel implements EventId {
     HWHEEL_HI_RES(12);
 
     private final int eventCodeValue;
+    private static final HashMap<Integer, Rel> VALUE_MAP;
+
+    static {
+        VALUE_MAP = new HashMap<>();
+        for (Rel eventCode : Rel.values()) {
+            VALUE_MAP.put(eventCode.getValue(), eventCode);
+
+        }
+
+    }
 
     private Rel(int eventCodeValue) {
         this.eventCodeValue = eventCodeValue;
@@ -28,4 +39,11 @@ public enum Rel implements EventId {
         return eventCodeValue;
 
     }           
+
+    @Override
+    public EventId fromValue(int value) {
+        return VALUE_MAP.get(value);
+    }
+
+
 }

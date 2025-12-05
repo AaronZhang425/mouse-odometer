@@ -1,5 +1,9 @@
 package eventclassification;
 
+import java.util.HashMap;
+
+import eventclassification.eventcodes.*;
+
 public enum EventTypes implements EventId{
     SYN(0x00),
     KEY(0x01),
@@ -16,6 +20,16 @@ public enum EventTypes implements EventId{
     NONE(-1);
 
     private final int value;
+    private static final HashMap<Integer, EventTypes> VALUE_MAP;
+
+    static {
+        VALUE_MAP = new HashMap<>();
+        for (EventTypes eventCode : EventTypes.values()) {
+            VALUE_MAP.put(eventCode.getValue(), eventCode);
+
+        }
+
+    }
 
     private EventTypes(int value) {
         this.value = value;
@@ -32,8 +46,14 @@ public enum EventTypes implements EventId{
         
     }
 
+    @Override
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public EventId fromValue(int value) {
+        return VALUE_MAP.get(value);
     }
 
 }
