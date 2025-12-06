@@ -2,9 +2,9 @@ package eventclassification.eventcodes;
 
 import java.util.HashMap;
 
-import eventclassification.EventId;
+import eventclassification.EventCategory;
 
-public enum Syn implements EventId {
+public enum Syn implements EventCategory {
     REPORT(0),
     CONFIG(1),
     MT_REPORT(2),
@@ -32,7 +32,7 @@ public enum Syn implements EventId {
 
     }
 
-    public static EventId fromValue(int value) {
+    public static EventCategory fromValue(int value) {
         return VALUE_MAP.get(value);
     }
 

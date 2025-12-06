@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import eventclassification.eventcodes.*;
 
-public enum EventTypes implements EventId{
+public enum EventTypes implements EventCategory{
     SYN(0x00),
     KEY(0x01),
     REL(0x02),
@@ -16,8 +16,7 @@ public enum EventTypes implements EventId{
     REP(0x14),
     FF(0x15),
     PWR(0x16),
-    FF_STATUS(0x17),
-    NONE(-1);
+    FF_STATUS(0x17);
 
     private final int value;
     private static final HashMap<Integer, EventTypes> VALUE_MAP;
@@ -35,16 +34,16 @@ public enum EventTypes implements EventId{
         this.value = value;
     }
     
-    public static EventTypes getEventTypeByValue(int value) {
-        for (EventTypes eventCode : EventTypes.values()) {
-            if (eventCode.getValue() == value) {
-                return eventCode;
-            }
-        }
+    // public static EventTypes getEventTypeByValue(int value) {
+    //     for (EventTypes eventCode : EventTypes.values()) {
+    //         if (eventCode.getValue() == value) {
+    //             return eventCode;
+    //         }
+    //     }
 
-        return EventTypes.NONE;
+    //     return EventTypes.NONE;
         
-    }
+    // }
 
     @Override
     public int getValue() {
@@ -52,7 +51,7 @@ public enum EventTypes implements EventId{
     }
 
     
-    public static EventId fromValue(int value) {
+    public static EventCategory fromValue(int value) {
         return VALUE_MAP.get(value);
     }
 

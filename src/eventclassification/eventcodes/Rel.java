@@ -1,9 +1,9 @@
 package eventclassification.eventcodes;
 
-import eventclassification.EventId;
+import eventclassification.EventCategory;
 import java.util.HashMap;
 
-public enum Rel implements EventId {
+public enum Rel implements EventCategory {
     X(0),
     Y(1),
     Z(2),
@@ -40,7 +40,7 @@ public enum Rel implements EventId {
 
     }           
 
-    public static EventId fromValue(int value) {
+    public static EventCategory fromValue(int value) {
         return VALUE_MAP.get(value);
     }
 

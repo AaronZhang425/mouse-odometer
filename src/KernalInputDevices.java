@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import eventclassification.EventId;
+import eventclassification.EventCategory;
 import eventclassification.EventTypes;
 
 import java.util.regex.Matcher;
@@ -69,7 +69,7 @@ public class KernalInputDevices {
         return new int[4];
     }
 
-    public EventTypes[] getPossibleEvents(String line) {
+    public EventCategory[] getPossibleEvents(String line) {
         String regex = "(?<=EV=)[0-9]+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
@@ -107,10 +107,10 @@ public class KernalInputDevices {
 
         }
 
-        EventTypes[] possibleEvents = new EventTypes[indices.size()];
+        EventCategory[] possibleEvents = new EventTypes[indices.size()];
 
         for (int i = 0; i < indices.size(); i++) {
-            possibleEvents[i] = EventTypes.getEventTypeByValue(indices.get(i));
+            possibleEvents[i] = EventTypes.fromValue(indices.get(i));
         }
 
         return possibleEvents;

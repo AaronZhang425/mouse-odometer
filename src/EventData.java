@@ -1,10 +1,10 @@
 
-import eventclassification.EventId;
+import eventclassification.EventCategory;
 import eventclassification.EventTypes;
 
 public record EventData(
     long[] time,
     EventTypes eventType,
-    EventId eventCode,
+    EventCategory eventCode,
     int value
 ) {}
