@@ -1,14 +1,12 @@
 package devicemanagement;
 
 
-import java.io.IOException;
-
-import EventData;
 import eventclassification.EventTypes;
 import eventclassification.eventcodes.Rel;
-
+import inputanalysis.EventData;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class InputReader {
     Mice mice;

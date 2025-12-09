@@ -1,3 +1,4 @@
+package inputanalysis;
 
 
 import eventclassification.EventCategory;

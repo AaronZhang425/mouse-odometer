@@ -1,17 +1,18 @@
 import devicemanagement.InputReader;
+import inputanalysis.EventData;
 
 public class Main {
 
     public static void main(String[] args) {       
-        InputReader odometer = new InputReader(1000, 2);
+        InputReader input = new InputReader(1000, 2);
 
         // int num = Key.TEMP.getValue();
 
         while (true) {
-            EventData inputData = odometer.getEventData();
+            EventData inputData = input.getEventData();
             System.out.println();
 
-            byte[] buffer = odometer.eventFileReader();
+            byte[] buffer = input.eventFileReader();
 
 
             for (byte elem : buffer) {
