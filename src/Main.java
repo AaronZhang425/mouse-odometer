@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {       
         Odometer odometer = new Odometer(1000, 2);
 
-        int num = Key.TEMP.getValue();
+        // int num = Key.TEMP.getValue();
 
         while (true) {
             EventData inputData = odometer.getEventData();
