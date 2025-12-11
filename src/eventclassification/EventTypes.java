@@ -6,17 +6,17 @@ import eventclassification.eventcodes.*;
 
 public enum EventTypes implements EventCategory{
     SYN(0x00, Syn.class),
-    KEY(0x01),
+    KEY(0x01, Key.class),
     REL(0x02, Rel.class),
-    ABS(0x03),
-    MSC(0x04),
-    SW(0x05),
-    LED(0x11),
-    SND(0x12),
-    REP(0x14),
-    FF(0x15),
-    PWR(0x16),
-    FF_STATUS(0x17);
+    ABS(0x03, Abs.class),
+    MSC(0x04, Msc.class),
+    SW(0x05, Sw.class),
+    LED(0x11, Led.class),
+    SND(0x12, Snd.class),
+    REP(0x14, Rep.class),
+    FF(0x15, null),
+    PWR(0x16, null),
+    FF_STATUS(0x17, null);
 
     // public abstract EventCategory getEventCodeSet();
 
@@ -36,13 +36,6 @@ public enum EventTypes implements EventCategory{
     private EventTypes(int value, Class<?> eventCodeSet) {
         this.value = value;
         this.eventCodeSet = eventCodeSet;
-    }
-
-    // temporary constructor
-    private EventTypes(int value) {
-        this.value = value;
-        eventCodeSet = null;
-        // this.eventCodeSet = eventCodeSet;
     }
     
     // public static EventTypes getEventTypeByValue(int value) {
