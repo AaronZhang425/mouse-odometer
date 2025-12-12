@@ -1,8 +1,8 @@
 package eventclassification;
 
-import java.util.HashMap;
-
 import eventclassification.eventcodes.*;
+import java.util.HashMap;
+import java.util.function.Function;
 
 public enum EventTypes implements EventCategory{
     SYN(0x00, Syn.class),
@@ -23,7 +23,7 @@ public enum EventTypes implements EventCategory{
     private final int VALUE;
     // private final Class<? extends EventCategory> eventCodeSet;
     private static final HashMap<Integer, EventTypes> VALUE_MAP;
-    private static final HashMap<EventTypes, EventCategory> EVENTCODES;
+    private static final HashMap<EventTypes, Function<Integer, EventCategory>> EVENTCODES;
 
     static {
         VALUE_MAP = new HashMap<>();
@@ -33,6 +33,9 @@ public enum EventTypes implements EventCategory{
         }
 
         EVENTCODES = new HashMap<>();
+
+        // methods manually put in to avoid java reflection
+        EVENTCODES.put(EventTypes.SYN, num -> );
 
     }
 
