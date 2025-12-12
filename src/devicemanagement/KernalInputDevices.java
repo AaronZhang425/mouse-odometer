@@ -21,38 +21,46 @@ public class KernalInputDevices {
         System.out.println("Test message");
     }
 
-    public ArrayList<InputDevice> update() {
-        List<String> lines = readDeviceList();
+    public ArrayList<InputDevice> getDevices() {
+        return devices;
+    }
 
+    public void update() {
+        List<String> lines = readDeviceList();
+        
         ArrayList<InputDevice> devices = new ArrayList<>();
         
-        for (int i = 0; i < lines.size(); i++) {
+        int i = 0;
+        while (i < lines.size()) {
             String line = lines.get(i).toLowerCase();
-            
+
             int[] id = new int[4];
             String name = "";
             File physicalPath = null;
             File systemFileSystem = null;
 
-            if (line.startsWith("i:")) {
-                id = getDeviceId(line);
+            while (!line.equals("")) {
 
-            } else if (line.startsWith("n")) {
-                getDeviceName(line);
+                if (line.startsWith("i:")) {
+                    id = getDeviceId(line);
 
+                } else if (line.startsWith("n")) {
+                    getDeviceName(line);
+
+                }
+
+                i++;
+              
             }
 
-            
-            // InputDevice device = new InputDevice(id, name, physicalPath, systemFileSystem);
-            // devices.add(device);
             devices.add(new InputDevice(id, name, physicalPath, systemFileSystem));
 
-    
+            i++;
+
         }
 
-        return devices;
-
     }
+
 
     public String getDeviceName(String line) {
         String regex = "\"([^\"]*)\"";

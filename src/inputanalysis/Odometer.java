@@ -1,12 +1,12 @@
 package inputanalysis;
 
-import devicemanagement.InputDevice;
+import devicemanagement.InputReader;
 
 // to be implemented
 public class Odometer {
-    private final InputDevice device;
+    private final InputReader reader;
 
-    public Odometer(InputDevice device) {
-        this.device = device;
+    public Odometer(InputReader reader) {
+        this.reader = reader;
     }
 }

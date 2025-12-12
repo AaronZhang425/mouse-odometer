@@ -4,7 +4,7 @@ import inputanalysis.EventData;
 public class Main {
 
     public static void main(String[] args) {       
-        InputReader input = new InputReader(1000, 2);
+        InputReader input = new InputReader(2);
 
         // int num = Key.TEMP.getValue();
 

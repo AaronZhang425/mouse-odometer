@@ -10,24 +10,21 @@ import java.io.IOException;
 
 public class InputReader {
     Mice mice;
-    int dpi;
 
-    public InputReader(int dpi) {
-        this.dpi = dpi;
+    public InputReader() {
         mice = new Mice();
     }
 
-    public InputReader(int dpi, int eventNum) {
-        this(dpi, new File("/dev/input/event" + eventNum));
+    public InputReader(int eventNum) {
+        this(new File("/dev/input/event" + eventNum));
 
     }
 
-    public InputReader(int dpi, String filePath) {
-        this(dpi, new File(filePath));
+    public InputReader(String filePath) {
+        this(new File(filePath));
     }
 
-    public InputReader(int dpi, File file) {
-        this.dpi = dpi;
+    public InputReader(File file) {
         mice = new Mice(file);
     }
 
