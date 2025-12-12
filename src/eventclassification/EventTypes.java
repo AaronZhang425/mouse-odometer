@@ -20,9 +20,10 @@ public enum EventTypes implements EventCategory{
 
     // public abstract EventCategory getEventCodeSet();
 
-    private final int value;
-    private final Class<? extends EventCategory> eventCodeSet;
+    private final int VALUE;
+    // private final Class<? extends EventCategory> eventCodeSet;
     private static final HashMap<Integer, EventTypes> VALUE_MAP;
+    private static final HashMap<EventTypes, EventCategory> EVENTCODES;
 
     static {
         VALUE_MAP = new HashMap<>();
@@ -31,11 +32,13 @@ public enum EventTypes implements EventCategory{
 
         }
 
+        EVENTCODES = new HashMap<>();
+
     }
 
     private EventTypes(int value, Class<? extends EventCategory> eventCodeSet) {
-        this.value = value;
-        this.eventCodeSet = eventCodeSet;
+        this.VALUE = value;
+        // this.eventCodeSet = eventCodeSet;
     }
 
     // public Class<? extends EventCategory> getEventCodeSet() {
@@ -44,7 +47,7 @@ public enum EventTypes implements EventCategory{
 
     @Override
     public int getValue() {
-        return value;
+        return VALUE;
     }
 
     
