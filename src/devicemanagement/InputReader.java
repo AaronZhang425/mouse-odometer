@@ -40,16 +40,7 @@ public class InputReader {
         int value = ByteArrayConverson.toInt(buffer, 23, 20);
 
         EventTypes eventType = EventTypes.byValue(eventTypeValue);
-        // Class<? extends EventCategory> eventCodeSet = eventType.getEventCodeSet();
 
-        // try {
-        //     Method getEventCodeFromValue = eventCodeSet.getMethod("fromValue", int.class);
-        //     getEventCodeFromValue.invoke(null, eventCodeValue);
-
-        // } catch (NoSuchMethodException error) {
-        //     System.out.println(error);
-        // }
-        // // EventId eventType = 
 
         return new EventData(
             getEventTime(buffer),
