@@ -36,8 +36,8 @@ public class InputReader {
         System.out.println();
 
         int eventTypeValue = ByteArrayConverson.toInt(buffer, 17, 16);
-        int eventCodeValue = ByteArrayConverson.toInt(buffer, 18, 19);
-        int value = ByteArrayConverson.toInt(buffer, 20, 23);
+        int eventCodeValue = ByteArrayConverson.toInt(buffer, 19, 18);
+        int value = ByteArrayConverson.toInt(buffer, 23, 20);
 
         EventTypes eventType = EventTypes.byValue(eventTypeValue);
         // Class<? extends EventCategory> eventCodeSet = eventType.getEventCodeSet();
