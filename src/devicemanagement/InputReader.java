@@ -5,11 +5,10 @@ import eventclassification.EventCategory;
 import eventclassification.EventTypes;
 import eventclassification.eventcodes.Abs;
 import eventclassification.eventcodes.Rel;
-import inputanalysis.EventData;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 public class InputReader {
     Mice mice;

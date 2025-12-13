@@ -1,4 +1,4 @@
-package inputanalysis;
+package devicemanagement;
 
 
 import eventclassification.EventCategory;

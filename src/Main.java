@@ -1,5 +1,5 @@
+import devicemanagement.EventData;
 import devicemanagement.InputReader;
-import inputanalysis.EventData;
 
 public class Main {
 
