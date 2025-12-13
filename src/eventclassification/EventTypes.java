@@ -23,7 +23,7 @@ public enum EventTypes implements EventCategory{
     private final int VALUE;
     // private final Class<? extends EventCategory> eventCodeSet;
     private static final HashMap<Integer, EventTypes> VALUE_MAP;
-    private static final HashMap<EventTypes, Function<Integer, EventCategory>> EVENTCODES;
+    private static final HashMap<EventTypes, Function<Integer, EventCategory>> EVENTCODES_MAP;
 
     static {
         VALUE_MAP = new HashMap<>();
@@ -32,69 +32,69 @@ public enum EventTypes implements EventCategory{
 
         }
 
-        EVENTCODES = new HashMap<>();
+        EVENTCODES_MAP = new HashMap<>();
 
         // methods manually put in to avoid java reflection due to
         // memory overhead
 
         // SYN
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.SYN, num -> {
                 return Syn.fromValue(num);
             }
         );
 
         // KEY
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.KEY, num -> {
                 return Key.fromValue(num);
             }
         );
 
         // REL
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.REL, num -> {
                 return Rel.fromValue(num);
             }
         );
 
         // ABS
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.ABS, num -> {
                 return Abs.fromValue(num);
             }
         );
 
         // MSC
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.MSC, num -> {
                 return Msc.fromValue(num);
             }
         );
 
         // SW
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.SW, num -> {
                 return Sw.fromValue(num);
             }
         );
 
         // LED
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.LED, num -> {
                 return Led.fromValue(num);
             }
         );
 
         // SND
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.SND, num -> {
                 return Snd.fromValue(num);
             }
         );
 
         // REP
-        EVENTCODES.put(
+        EVENTCODES_MAP.put(
             EventTypes.REP, num -> {
                 return Rep.fromValue(num);
             }
@@ -102,14 +102,14 @@ public enum EventTypes implements EventCategory{
 
         // Could be implemented for wider support
         // // FF
-        // EVENTCODES.put(
+        // EVENTCODES_MAP.put(
         //     EventTypes.FF, num -> {
         //         return FF.fromValue(num);
         //     }
         // );
 
         // // PWR
-        // EVENTCODES.put(
+        // EVENTCODES_MAP.put(
         //     EventTypes.PWR, num -> {
         //         return PWR.fromValue(num);
         //     }
@@ -126,6 +126,10 @@ public enum EventTypes implements EventCategory{
     @Override
     public int getValue() {
         return VALUE;
+    }
+
+    public EventCategory eventCodeByValue(int num) {
+        return EVENTCODES_MAP.get(this).apply(num);
     }
 
     
