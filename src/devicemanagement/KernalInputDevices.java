@@ -22,7 +22,8 @@ public class KernalInputDevices {
     }
 
     public ArrayList<InputDevice> getDevices() {
-        return devices;
+        return new ArrayList<>(devices);
+        
     }
 
     public void update() {
