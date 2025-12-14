@@ -229,7 +229,12 @@ public enum Key implements EventCategory {
     CANCEL(223),
     BRIGHTNESSDOWN(224),
     BRIGHTNESSUP(225),
-    MEDIA(226);
+    MEDIA(226),
+
+    SWITCHDEVICEMODE(227),
+    KBDILLUMTOGGLE(228),
+    KBDILLUMDOWN(229),
+    KBDILLUMUP(230);
 
     private final int value;
     private static final HashMap<Integer, Key> VALUE_MAP;
