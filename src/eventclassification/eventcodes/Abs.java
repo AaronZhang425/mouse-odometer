@@ -28,7 +28,17 @@ public enum Abs implements EventCode {
     DISTANCE(0x19),
     TILT_X(0x1a),
     TILT_Y(0x1b),
-    TOOL_WIDTH(0x1c);    
+    TOOL_WIDTH(0x1c),
+    
+    VOLUME(0x20),
+    PROFILE(0x21),
+    MISC(0x28),
+    
+    RESERVED(0x2e),
+    
+    MT_SLOT(0x2f),
+    MT_TOUCH_MAJOR(0x30),
+    MT_TOUCH_MINOR(0x32);    
 
     private final int value;
     private static final HashMap<Integer, Abs> VALUE_MAP;

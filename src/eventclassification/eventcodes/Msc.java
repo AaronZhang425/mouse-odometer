@@ -3,7 +3,12 @@ package eventclassification.eventcodes;
 import java.util.HashMap;
 
 public enum Msc implements EventCode {
-    TEMP(0);    
+    SERIAL(0),
+    PULSELED(1),
+    GESTURE(2),
+    RAW(3),
+    SCAN(4),
+    TIMESTAMP(5);    
 
     private final int value;
     private static final HashMap<Integer, Msc> VALUE_MAP;

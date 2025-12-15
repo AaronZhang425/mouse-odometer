@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+// Old and needs to be replaced
 public final class Mice {
 
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");

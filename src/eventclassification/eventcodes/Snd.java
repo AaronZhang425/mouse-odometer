@@ -3,7 +3,9 @@ package eventclassification.eventcodes;
 import java.util.HashMap;
 
 public enum Snd implements EventCode {
-    TEMP(0);    
+    CLICK(0x00),
+    BELL(0x01),
+    TONE(0x02);    
 
     private final int value;
     private static final HashMap<Integer, Snd> VALUE_MAP;

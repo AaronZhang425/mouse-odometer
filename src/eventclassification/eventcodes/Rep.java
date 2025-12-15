@@ -3,7 +3,8 @@ package eventclassification.eventcodes;
 import java.util.HashMap;
 
 public enum Rep implements EventCode {
-    TEMP(0);    
+    DELAY(0x00),
+    PERIOD(0x01);    
 
     private final int value;
     private static final HashMap<Integer, Rep> VALUE_MAP;

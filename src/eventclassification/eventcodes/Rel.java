@@ -3,19 +3,20 @@ package eventclassification.eventcodes;
 import java.util.HashMap;
 
 public enum Rel implements EventCode {
-    X(0),
-    Y(1),
-    Z(2),
-    RX(3),
-    RY(4),
-    RZ(5),
-    HWHEEL(6),
-    DIAL(7),
-    WHEEL(8),
-    MISC(9),
-    RESERVED(10),
-    WHEEL_HI_RES(11),
-    HWHEEL_HI_RES(12);
+    X(0x00),
+    Y(0x01),
+    Z(0x02),
+    RX(0x03),
+    RY(0x04),
+    RZ(0x05),
+    HWHEEL(0x06),
+    DIAL(0x07),
+    WHEEL(0x08),
+    MISC(0x09),
+
+    RESERVED(0x0a),
+    WHEEL_HI_RES(0x0b),
+    HWHEEL_HI_RES(0x0c);
 
     private final int value;
     private static final HashMap<Integer, Rel> VALUE_MAP;
