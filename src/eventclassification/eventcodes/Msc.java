@@ -2,9 +2,7 @@ package eventclassification.eventcodes;
 
 import java.util.HashMap;
 
-import eventclassification.EventCategory;
-
-public enum Msc implements EventCategory {
+public enum Msc implements EventCode {
     TEMP(0);    
 
     private final int value;

@@ -23,7 +23,7 @@ public class KernalInputDevices {
 
     public ArrayList<InputDevice> getDevices() {
         return new ArrayList<>(devices);
-        
+
     }
 
     public void update() {
@@ -61,6 +61,11 @@ public class KernalInputDevices {
         }
 
     }
+
+    // to be implemented
+    private int getNumberOfDevices() {
+        return 0;
+    }   
 
 
     public String getDeviceName(String line) {

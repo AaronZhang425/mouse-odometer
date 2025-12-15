@@ -2,9 +2,8 @@ package eventclassification.eventcodes;
 
 import java.util.HashMap;
 
-import eventclassification.EventCategory;
 
-public enum Led implements EventCategory {
+public enum Led implements EventCode {
     TEMP(0);    
 
     private final int value;

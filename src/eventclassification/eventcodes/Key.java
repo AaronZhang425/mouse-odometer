@@ -1,9 +1,8 @@
 package eventclassification.eventcodes;
 
-import eventclassification.EventCategory;
 import java.util.HashMap;
 
-public enum Key implements EventCategory {
+public enum Key implements EventCode {
     RESERVED(0),
     ESC(1),
     ONE(2),

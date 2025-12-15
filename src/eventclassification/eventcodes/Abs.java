@@ -2,9 +2,7 @@ package eventclassification.eventcodes;
 
 import java.util.HashMap;
 
-import eventclassification.EventCategory;
-
-public enum Abs implements EventCategory {
+public enum Abs implements EventCode {
     X(0x00),
     Y(0x01),
     Z(0x02),
@@ -25,7 +23,7 @@ public enum Abs implements EventCategory {
     HAT2Y(0x15),
     HAT3X(0x16),
     HAT3Y(0x17),
-    
+
     PRESSURE(0x18),
     DISTANCE(0x19),
     TILT_X(0x1a),

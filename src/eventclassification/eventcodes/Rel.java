@@ -1,9 +1,8 @@
 package eventclassification.eventcodes;
 
-import eventclassification.EventCategory;
 import java.util.HashMap;
 
-public enum Rel implements EventCategory {
+public enum Rel implements EventCode {
     X(0),
     Y(1),
     Z(2),

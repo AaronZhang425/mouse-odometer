@@ -2,9 +2,7 @@ package eventclassification.eventcodes;
 
 import java.util.HashMap;
 
-import eventclassification.EventCategory;
-
-public enum Syn implements EventCategory {
+public enum Syn implements EventCode {
     REPORT(0),
     CONFIG(1),
     MT_REPORT(2),

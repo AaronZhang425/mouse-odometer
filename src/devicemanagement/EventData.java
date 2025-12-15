@@ -1,12 +1,11 @@
 package devicemanagement;
 
-
-import eventclassification.EventCategory;
 import eventclassification.EventTypes;
+import eventclassification.eventcodes.EventCode;
 
 public record EventData(
     long[] time,
     EventTypes eventType,
-    EventCategory eventCode,
+    EventCode eventCode,
     int value
 ) {}

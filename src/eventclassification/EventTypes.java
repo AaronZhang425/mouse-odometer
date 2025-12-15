@@ -23,7 +23,7 @@ public enum EventTypes implements EventCategory{
     private final int VALUE;
     // private final Class<? extends EventCategory> eventCodeSet;
     private static final HashMap<Integer, EventTypes> VALUE_MAP;
-    private static final HashMap<EventTypes, Function<Integer, EventCategory>> EVENTCODES_MAP;
+    private static final HashMap<EventTypes, Function<Integer, EventCode>> EVENTCODES_MAP;
 
     static {
         VALUE_MAP = new HashMap<>();
@@ -32,10 +32,10 @@ public enum EventTypes implements EventCategory{
 
         }
 
-        EVENTCODES_MAP = new HashMap<>();
-
         // methods manually put in to avoid java reflection due to
         // memory overhead
+
+        EVENTCODES_MAP = new HashMap<>();
 
         // SYN
         EVENTCODES_MAP.put(
@@ -128,7 +128,7 @@ public enum EventTypes implements EventCategory{
         return VALUE;
     }
 
-    public EventCategory eventCodeByValue(int num) {
+    public EventCode eventCodeByValue(int num) {
         return EVENTCODES_MAP.get(this).apply(num);
     }
 
