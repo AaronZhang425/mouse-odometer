@@ -62,12 +62,6 @@ public class KernalInputDevices {
 
     }
 
-    // to be implemented
-    private int getNumberOfDevices() {
-        return 0;
-    }   
-
-
     public String getDeviceName(String line) {
         String regex = "\"([^\"]*)\"";
         Pattern pattern = Pattern.compile(regex);
