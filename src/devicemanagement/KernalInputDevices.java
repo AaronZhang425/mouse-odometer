@@ -5,6 +5,7 @@ import eventclassification.EventCategory;
 import eventclassification.EventTypes;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,8 +82,21 @@ public class KernalInputDevices {
     }
 
     // to be implemented
-    public File[] getHandlers(String line) {
-        return new File[2];
+    public File getHandlers(String line) {
+
+        String regEx = "event[0-9]+";
+        Pattern eventRegEx = Pattern.compile(regEx);
+        Matcher matcher = eventRegEx.matcher(line);
+
+        if (matcher.find()) {
+            return new File("/dev/bus/input/" + matcher.group(0));
+
+        }
+
+        throw new CustomUncheckedException();
+
+
+
     }
 
     public EventCategory[] getPossibleEvents(String line) {
