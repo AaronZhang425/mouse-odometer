@@ -37,9 +37,11 @@ public class KernalInputDevices {
             String line = lines.get(i).toLowerCase();
 
             int[] id = new int[4];
-            String name = "";
+            String name = null;
             File physicalPath = null;
             File systemFileSystem = null;
+            File eventFile = null;
+            EventTypes[] possiableEventTypes = null;
 
             while (!line.equals("")) {
 
@@ -47,7 +49,13 @@ public class KernalInputDevices {
                     id = getDeviceId(line);
 
                 } else if (line.startsWith("n")) {
-                    getDeviceName(line);
+                    name = getDeviceName(line);
+
+                } else if (line.startsWith("h")) {
+                    eventFile = getHandlers(line);
+
+                } else if (line.startsWith("b: ev=")) {
+                    possiableEventTypes = getPossibleEvents(line);
 
                 }
 
@@ -55,7 +63,14 @@ public class KernalInputDevices {
               
             }
 
-            devices.add(new InputDevice(id, name, physicalPath, systemFileSystem));
+            devices.add(new InputDevice(
+                id,
+                name,
+                physicalPath,
+                systemFileSystem,
+                eventFile,
+                possiableEventTypes
+            ));
 
             i++;
 
@@ -81,9 +96,7 @@ public class KernalInputDevices {
         return new int[4];
     }
 
-    // to be implemented
-    public File getHandlers(String line) throws FileNotFoundException {
-
+    public File getHandlers(String line) {
         String regEx = "event[0-9]+";
         Pattern eventRegEx = Pattern.compile(regEx);
         Matcher matcher = eventRegEx.matcher(line);
@@ -99,8 +112,8 @@ public class KernalInputDevices {
 
     }
 
-    public EventCategory[] getPossibleEvents(String line) {
-        String regex = "(?<=EV=)[0-9]+";
+    public EventTypes[] getPossibleEvents(String line) {
+        String regex = "(?<=ev=)[0-9]+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
 
