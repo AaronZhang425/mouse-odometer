@@ -82,7 +82,7 @@ public class KernalInputDevices {
     }
 
     // to be implemented
-    public File getHandlers(String line) {
+    public File getHandlers(String line) throws FileNotFoundException {
 
         String regEx = "event[0-9]+";
         Pattern eventRegEx = Pattern.compile(regEx);
@@ -93,7 +93,7 @@ public class KernalInputDevices {
 
         }
 
-        throw new CustomUncheckedException();
+        return null;
 
 
 
