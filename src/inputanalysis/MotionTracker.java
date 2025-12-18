@@ -37,6 +37,22 @@ public class MotionTracker implements Runnable {
         
     }
 
+    public void getAcceleration(EventData[] data) {
+        long initialSeconds = data[0].time()[0];
+        long intialMicroseconds = data[0].time()[1];
+
+        long finalSeconds = data[1].time()[0];
+        long finalMicroseconds = data[1].time()[1];
+
+        // in seconds
+        double timeDelta = (
+            (finalSeconds - initialSeconds) +
+            (finalMicroseconds - initialSeconds) / 1E6
+        );
+
+
+    }
+
     public void getData() {
         int foundXValues = 0;
         int foundYValues = 0;

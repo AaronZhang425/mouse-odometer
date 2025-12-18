@@ -7,11 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class InputReader {
-    Mice mice;
-
-    public InputReader() {
-        mice = new Mice();
-    }
+    private File inputFile;
 
     public InputReader(int eventNum) {
         this(new File("/dev/input/event" + eventNum));
@@ -23,7 +19,7 @@ public class InputReader {
     }
 
     public InputReader(File file) {
-        mice = new Mice(file);
+        inputFile = file;
     }
 
     public EventData getEventData() {
@@ -73,8 +69,7 @@ public class InputReader {
         
         try {
             
-            FileInputStream reader = new FileInputStream(
-            mice.getMouseHandlerFile());
+            FileInputStream reader = new FileInputStream(inputFile);
             
             reader.read(buffer);
             reader.close();
