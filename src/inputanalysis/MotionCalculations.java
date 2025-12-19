@@ -16,10 +16,10 @@ public class MotionCalculations implements Runnable {
     // inner: components of vector (x, y)
     private final double[][] motionData = new double[3][2];
 
-    public MotionCalculations(InputReader reader, double[] origin) {
+    public MotionCalculations(InputReader reader, double[] start) {
         this.reader = reader;
-        motionData[0][0] = origin[0];
-        motionData[0][1] = origin[1];
+        motionData[0][0] = start[0];
+        motionData[0][1] = start[1];
 
     }
     
@@ -47,7 +47,7 @@ public class MotionCalculations implements Runnable {
         // in seconds
         double timeDelta = (
             (finalSeconds - initialSeconds) +
-            (finalMicroseconds - initialSeconds) / 1E6
+            (finalMicroseconds - intialMicroseconds) / 1.0E60
         );
 
 
