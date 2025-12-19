@@ -309,7 +309,24 @@ public enum Key implements EventCode {
     BTN_START(0x13b),
     BTN_MODE(0x13c),
     BTN_THUMBL(0x13d),
-    BTN_THUMBR(0x13e);
+    BTN_THUMBR(0x13e),
+    
+    BTN_TOOL_PEN(0x140),
+    BTN_TOOL_RUBBER(0x141),
+    BTN_TOOL_BRUSH(0x142),
+    BTN_TOOL_PENCIL(0x143),
+    BTN_TOOL_AIRBRUSH(0x144),
+    BTN_TOOL_FINGER(0x145),
+    BTN_TOOL_MOUSE(0x146),
+    BTN_TOOL_LENS(0x147),
+    BTN_TOOL_QUINTTAP(0x148),
+    BTN_STYLUS3(0x149),
+    BTN_TOUCH(0x14a),
+    BTN_STYLUS(0x14b),
+    BTN_STYLUS2(0x14c),
+    BTN_TOOL_DOUBLETAP(0x14d),
+    BTN_TOOL_TRIPLETAP(0x14e),
+    BTN_TOOL_QUADTAP(0x14f);
 
     private final int value;
     private static final HashMap<Integer, Key> VALUE_MAP;
