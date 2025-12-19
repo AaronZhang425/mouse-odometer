@@ -2,12 +2,13 @@ package inputanalysis;
 
 import devicemanagement.EventData;
 import devicemanagement.InputReader;
+import devicemanagement.Mouse;
 import eventclassification.EventTypes;
 import eventclassification.eventcodes.Rel;
 
-// to be implemented
 public class MotionCalculations implements Runnable {
     private final InputReader reader;
+    private final Mouse mouse;
 
     private final EventData[] xValues = new EventData[2];
     private final EventData[] yValues = new EventData[2];
@@ -16,16 +17,20 @@ public class MotionCalculations implements Runnable {
     // inner: components of vector (x, y)
     private final double[][] motionData = new double[3][2];
 
-    public MotionCalculations(InputReader reader, double[] start) {
-        this.reader = reader;
+    public MotionCalculations(Mouse mouse, double[] start) {
+        this.mouse = mouse;
+        this.reader = new InputReader(this.mouse.device().handlerFile());
+        
         motionData[0][0] = start[0];
         motionData[0][1] = start[1];
-
+        
     }
     
     
-    public MotionCalculations(InputReader reader) {
-        this.reader = reader;
+    public MotionCalculations(Mouse mouse) {
+        this.mouse = mouse;
+        this.reader = new InputReader(this.mouse.device().handlerFile());
+
         motionData[0][0] = 0;
         motionData[0][1] = 0;
 
@@ -37,6 +42,19 @@ public class MotionCalculations implements Runnable {
         
     }
 
+    public void getVelocity(EventData[] data) {
+        int intialCount = data[0].value();
+        int finalCount = data[1].value();
+
+        // in m/s
+        // currently only gets length, not velocity
+        double initialMeters = ((1.0 * intialCount / mouse.dpi()) * 0.0254);
+        double finalMeters = ((1.0 * finalCount / mouse.dpi()) * 0.0254);
+
+    }
+
+    // data is a parameter that represents an initial and final component
+    // of a vector
     public void getAcceleration(EventData[] data) {
         long initialSeconds = data[0].time()[0];
         long intialMicroseconds = data[0].time()[1];
