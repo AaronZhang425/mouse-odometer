@@ -42,20 +42,54 @@ public class MotionCalculations implements Runnable {
         
     }
 
-    public void getVelocity(EventData[] data) {
+    private double mouseCountsToMeters(int counts, int dpi) {
+        return (1.0 * counts / dpi) * 0.0254;
+    }
+
+    private double mouseCountsToMeters(int counts) {
+        return mouseCountsToMeters(counts, mouse.dpi());
+        // return (1.0 * counts / mouse.dpi()) * 0.0254;
+    }
+
+
+    private void displacement(EventData[] data) {
+
+    }
+
+    private void getVelocity(EventData[] data) {
         int intialCount = data[0].value();
         int finalCount = data[1].value();
 
         // in m/s
         // currently only gets length, not velocity
-        double initialMeters = ((1.0 * intialCount / mouse.dpi()) * 0.0254);
-        double finalMeters = ((1.0 * finalCount / mouse.dpi()) * 0.0254);
+        double initialMeters = mouseCountsToMeters(intialCount);
+        double finalMeters = mouseCountsToMeters(finalCount);
 
     }
 
     // data is a parameter that represents an initial and final component
     // of a vector
-    public void getAcceleration(EventData[] data) {
+    private void getAcceleration(EventData[] data) {
+        double timeDifference = getTimeDifference(data);
+
+
+
+        // long initialSeconds = data[0].time()[0];
+        // long intialMicroseconds = data[0].time()[1];
+
+        // long finalSeconds = data[1].time()[0];
+        // long finalMicroseconds = data[1].time()[1];
+
+        // // in seconds
+        // double timeDelta = (
+        //     (finalSeconds - initialSeconds) +
+        //     (finalMicroseconds - intialMicroseconds) / 1.0E60
+        // );
+
+
+    }
+
+    private double getTimeDifference(EventData[] data) {
         long initialSeconds = data[0].time()[0];
         long intialMicroseconds = data[0].time()[1];
 
@@ -63,15 +97,16 @@ public class MotionCalculations implements Runnable {
         long finalMicroseconds = data[1].time()[1];
 
         // in seconds
-        double timeDelta = (
+        double timeDifference = (
             (finalSeconds - initialSeconds) +
             (finalMicroseconds - intialMicroseconds) / 1.0E60
         );
 
+        return timeDifference;
 
     }
 
-    public void getData() {
+    private void getData() {
         int foundXValues = 0;
         int foundYValues = 0;
 
