@@ -326,7 +326,17 @@ public enum Key implements EventCode {
     BTN_STYLUS2(0x14c),
     BTN_TOOL_DOUBLETAP(0x14d),
     BTN_TOOL_TRIPLETAP(0x14e),
-    BTN_TOOL_QUADTAP(0x14f);
+    BTN_TOOL_QUADTAP(0x14f),
+    
+    BTN_GEAR_DOWN(0x150),
+    BTN_GEAR_UP(0x151),
+    
+    KEY_OK(0x160),
+    KEY_SELECT(0x161),
+    KEY_GOTO(0x162),
+    KEY_CLEAR(0x163),
+    KEY_POWER2(0x164),
+    KEY_OPTION(0x165);
 
     private final int value;
     private static final HashMap<Integer, Key> VALUE_MAP;
