@@ -10,8 +10,8 @@ public class MotionCalculations implements Runnable {
     private final InputReader reader;
     private final Mouse mouse;
 
-    private final EventData[] xValues = new EventData[2];
-    private final EventData[] yValues = new EventData[2];
+    private final EventData[] xValues = new EventData[3];
+    private final EventData[] yValues = new EventData[3];
 
     // outer: displacement, velocity, acceleration
     // inner: components of vector (x, y)
@@ -110,7 +110,7 @@ public class MotionCalculations implements Runnable {
         int foundXValues = 0;
         int foundYValues = 0;
 
-        while (foundXValues < 2 || foundYValues < 2) {
+        while (foundXValues < 3 || foundYValues < 3) {
             EventData data = reader.getEventData();
 
             if (!data.eventType().equals(EventTypes.REL)) {
