@@ -39,6 +39,10 @@ public class MotionCalculations implements Runnable {
     @Override
     public void run() {
         // TODO Auto-generated method stub
+        while (true) {
+            getData();
+            
+        }
         
     }
 
@@ -121,13 +125,16 @@ public class MotionCalculations implements Runnable {
                 foundXValues++;
 
                 xValues[0] = xValues[1];
-                xValues[1] = data;
+                xValues[1] = xValues[2];
+                xValues[2] = data;
                 continue;
                 
             } else if (data.eventCode().equals(Rel.REL_Y)) {
                 foundYValues++;
+
                 yValues[0] = yValues[1];
-                yValues[1] = data;
+                yValues[1] = yValues[2];
+                yValues[2] = data;
 
             }
 
