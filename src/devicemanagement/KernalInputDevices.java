@@ -18,36 +18,41 @@ public class KernalInputDevices {
     private final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
 
     // List of devices
-    private ArrayList<InputDevice> devices;
+    private ArrayList<InputDevice> devices = new ArrayList<>();
 
     public KernalInputDevices() {
         System.out.println("Test message");
     }
-
+    
     public ArrayList<InputDevice> getDevices() {
+        // System.out.println("Hello");
+        System.out.println(devices.size());
         return new ArrayList<>(devices);
 
     }
 
     // update list of devices
+    // TODO: increase efficiency of method
     public void update() {
+
         List<String> lines = readDeviceList();
-        
-        ArrayList<InputDevice> devices = new ArrayList<>();
+        System.out.println(lines.size());
         
         int i = 0;
         while (i < lines.size()) {
             String line = lines.get(i).toLowerCase();
-
+            
             int[] id = new int[4];
             String name = null;
             File physicalPath = null;
             File systemFileSystem = null;
             File eventFile = null;
             EventTypes[] possiableEventTypes = null;
-
-            while (!line.equals("")) {
-
+            
+            while (!line.equals("") && i < lines.size()) {
+                line = lines.get(i).toLowerCase();
+                // System.out.println(line);
+                
                 if (line.startsWith("i:")) {
                     id = getDeviceId(line);
 
@@ -125,6 +130,7 @@ public class KernalInputDevices {
         }
 
         String ev = matcher.group(0);
+        // System.out.println(ev);
 
         int bitMap = 0;
 
@@ -141,11 +147,18 @@ public class KernalInputDevices {
 
         }
 
+        // System.out.println("BitMap: " + bitMap);
+        // String binaryString = Integer.toBinaryString(bitMap);
+        // String paddedBinaryString = String.format("%32s", binaryString).replaceAll(" ", "0");
+        // System.out.println("Padded binary string: " + paddedBinaryString);
+
         ArrayList<Integer> indices = new ArrayList<>();
 
         for (int i = 0; i < Integer.SIZE; i++) {
-            if ((bitMap | 1) == 1) {
+            // System.out.println((bitMap & 1) == 1);
+            if ((bitMap & 1) == 1) {
                 indices.add(i);
+                // System.out.println("Index value: " + i);
             }
 
             bitMap >>>= 1;
