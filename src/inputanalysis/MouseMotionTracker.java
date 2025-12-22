@@ -36,47 +36,103 @@ public class MouseMotionTracker implements Runnable {
 
     }
 
+    public double[][] getMotionData() {
+        return motionData.clone();
+    }
+
+
     @Override
     public void run() {
         // TODO Auto-generated method stub
         while (true) {
             getData();
+
+            // update x displacement
+            motionData[0][0] += totalDisplacement(xValues);
+            // update y displacement
+            motionData[0][1] += totalDisplacement(yValues);
+
+
             
         }
         
     }
-
+    
     private double mouseCountsToMeters(int counts, int dpi) {
         return (1.0 * counts / dpi) * 0.0254;
     }
-
+    
     private double mouseCountsToMeters(int counts) {
         return mouseCountsToMeters(counts, mouse.dpi());
         // return (1.0 * counts / mouse.dpi()) * 0.0254;
     }
+    
+    
+
+    private double totalDisplacement(EventData[] data) {
+        double displacement = 0;
+
+        for (EventData event : data) {
+            displacement += mouseCountsToMeters(event.value());
+        }
+
+        return displacement;
+
+    }
+    
+    // private void displacement() {
+
+    // }
+
+    // private double getVelocity(EventData event0, EventData event1) {
+    //     double timeDifference = getTimeDifference(event0.finalData);
+    //     double finalMeters = mouseCountsToMeters(event1.value());
+
+    //     return finalMeters / timeDifference;
 
 
-    private void displacement(EventData[] data) {
+    //     // in m/s
+    //     // currently only gets length, not velocity
+    //     // double initialMeters = mouseCountsToMeters(initialCount);
+
+    // }
+
+    private double getVelocity(
+        double displacementDifference,
+        double timeDifference
+    ) {
+
+        return displacementDifference / timeDifference;
 
     }
 
-    private void getVelocity(EventData[] data) {
-        int intialCount = data[0].value();
-        int finalCount = data[1].value();
+    private double getVelocity(
+        double intialDisplacement,
+        double finalDisplacemenet,
+        double timeDifference
+    ) {
 
-        // in m/s
-        // currently only gets length, not velocity
-        double initialMeters = mouseCountsToMeters(intialCount);
-        double finalMeters = mouseCountsToMeters(finalCount);
+        return (finalDisplacemenet - intialDisplacement) / timeDifference;
 
     }
 
     // data is a parameter that represents an initial and final component
     // of a vector
-    private void getAcceleration(EventData[] data) {
-        double timeDifference = getTimeDifference(data);
+    private double getAcceleration(
+        double intialVelocity,
+        double finalVelocity,
+        double timeDifference
+    ) {
+        return (finalVelocity - intialVelocity) / timeDifference;
 
+    }
 
+    private double getTimeDifference(EventData intialData, EventData finalData) {
+        long initialSeconds = intialData.time()[0];
+        long initialMicroseconds = intialData.time()[1];
+
+        long finalSeconds = finalData.time()[0];
+        long finalMicroseconds = finalData.time()[1];
 
         // long initialSeconds = data[0].time()[0];
         // long intialMicroseconds = data[0].time()[1];
@@ -84,26 +140,10 @@ public class MouseMotionTracker implements Runnable {
         // long finalSeconds = data[1].time()[0];
         // long finalMicroseconds = data[1].time()[1];
 
-        // // in seconds
-        // double timeDelta = (
-        //     (finalSeconds - initialSeconds) +
-        //     (finalMicroseconds - intialMicroseconds) / 1.0E60
-        // );
-
-
-    }
-
-    private double getTimeDifference(EventData[] data) {
-        long initialSeconds = data[0].time()[0];
-        long intialMicroseconds = data[0].time()[1];
-
-        long finalSeconds = data[1].time()[0];
-        long finalMicroseconds = data[1].time()[1];
-
         // in seconds
         double timeDifference = (
             (finalSeconds - initialSeconds) +
-            (finalMicroseconds - intialMicroseconds) / 1.0E60
+            (finalMicroseconds - initialMicroseconds) / 1.0E60
         );
 
         return timeDifference;
