@@ -21,7 +21,8 @@ public class KernalInputDevices {
     private ArrayList<InputDevice> devices = new ArrayList<>();
 
     public KernalInputDevices() {
-        System.out.println("Test message");
+        System.out.println("Auto-update list");;
+        update();
     }
     
     public ArrayList<InputDevice> getDevices() {
@@ -32,55 +33,45 @@ public class KernalInputDevices {
     }
 
     // update list of devices
-    // TODO: increase efficiency of method
     public void update() {
 
         List<String> lines = readDeviceList();
         System.out.println(lines.size());
         
-        int i = 0;
-        while (i < lines.size()) {
+        int[] id = new int[4];
+        String name = null;
+        File physicalPath = null;
+        File systemFileSystem = null;
+        File eventFile = null;
+        EventTypes[] possiableEventTypes = null;
+
+
+        for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i).toLowerCase();
-            
-            int[] id = new int[4];
-            String name = null;
-            File physicalPath = null;
-            File systemFileSystem = null;
-            File eventFile = null;
-            EventTypes[] possiableEventTypes = null;
-            
-            while (!line.equals("") && i < lines.size()) {
-                line = lines.get(i).toLowerCase();
-                // System.out.println(line);
-                
-                if (line.startsWith("i:")) {
-                    id = getDeviceId(line);
 
-                } else if (line.startsWith("n")) {
-                    name = getDeviceName(line);
 
-                } else if (line.startsWith("h")) {
-                    eventFile = getHandlers(line);
+            if (line.startsWith("i:")) {
+                id = getDeviceId(line);
 
-                } else if (line.startsWith("b: ev=")) {
-                    possiableEventTypes = getPossibleEvents(line);
+            } else if (line.startsWith("n")) {
+                name = getDeviceName(line);
 
-                }
+            } else if (line.startsWith("h")) {
+                eventFile = getHandlers(line);
 
-                i++;
-              
+            } else if (line.startsWith("b: ev=")) {
+                possiableEventTypes = getPossibleEvents(line);
+
+            } else if (line.equals("")) {
+                devices.add(new InputDevice(
+                    id,
+                    name,
+                    physicalPath,
+                    systemFileSystem,
+                    eventFile,
+                    possiableEventTypes
+                ));                
             }
-
-            devices.add(new InputDevice(
-                id,
-                name,
-                physicalPath,
-                systemFileSystem,
-                eventFile,
-                possiableEventTypes
-            ));
-
-            i++;
 
         }
 
