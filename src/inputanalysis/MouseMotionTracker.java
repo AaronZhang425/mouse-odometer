@@ -1,5 +1,7 @@
 package inputanalysis;
 
+import org.w3c.dom.events.Event;
+
 import devicemanagement.EventData;
 import devicemanagement.InputReader;
 import devicemanagement.Mouse;
@@ -69,17 +71,22 @@ public class MouseMotionTracker implements Runnable {
     
     
 
-    private double totalDisplacement(EventData[] data) {
+    private double totalDisplacement(EventData[] event) {
         double displacement = 0;
 
-        for (EventData event : data) {
-            displacement += mouseCountsToMeters(event.value());
+        for (EventData data : event) {
+            displacement += getDisplacement(data);
         }
 
         return displacement;
 
     }
-    
+
+    private double getDisplacement(EventData event) {
+        return mouseCountsToMeters(event.value());
+
+    }
+
     // private void displacement() {
 
     // }
