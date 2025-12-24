@@ -339,7 +339,8 @@ public enum Key implements EventCode {
     KEY_OPTION(0x165),
     KEY_INFO(0x166),
     KEY_TIME(0x167),
-    KEY_VENDOR(0x168);
+    KEY_VENDOR(0x168),
+    KEY_ARCHIVE(0x169);
 
     private final int value;
     private static final HashMap<Integer, Key> VALUE_MAP;
