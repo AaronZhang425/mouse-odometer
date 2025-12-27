@@ -206,6 +206,10 @@ public class KernalInputDevices {
 
     }
 
+    private static EventCode getPossibleEventCodes(String eventDirName, EventTypes eventType) {
+        return null;
+    }
+
     private static EventTypes[] getPossibleEventTypes(String eventDirName) {
         File eventTypeCapabilitiesFile = new File(
             INPUT_DEVICE_DIR + 
