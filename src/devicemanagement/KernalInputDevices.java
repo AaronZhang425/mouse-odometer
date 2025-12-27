@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class KernalInputDevices {
     // This file lists all devices and their details
-    private static final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
+    // private static final File INPUT_DEVICE_INFO = new File("/proc/bus/input/devices");
     private static final File INPUT_DEVICE_DIR = new File("/sys/class/input");
 
     // List of devices
@@ -31,12 +31,6 @@ public class KernalInputDevices {
     static {
         update();
     }
-
-    // public KernalInputDevices() {
-    //     System.out.println("Auto-update list");;
-    //     update();
-    // }
-
     
     // get devices with that have the event types listed in the parameters
     // to be implemented
@@ -63,18 +57,12 @@ public class KernalInputDevices {
     }
     
     public static ArrayList<InputDevice> getDevices() {
-        // System.out.println("Hello");
-        // System.out.println(devices.size());
         return new ArrayList<>(devices);
 
     }
 
     // update list of devices
     public static void update() {
-
-        // List<String> lines = readDeviceList();
-        // System.out.println(lines.size());
-        
         int[] id = new int[4];
         String name = null;
         File physicalPath = null;
@@ -86,54 +74,20 @@ public class KernalInputDevices {
 
         for (String eventDir : eventDirs) {
             System.out.println(eventDir);
-            // File eventDetailsDir = new File(INPUT_DEVICE_DIR.getPath() + eventDir + "/device");
             
             id = getDeviceId(eventDir);
             System.out.println(id);
 
-            // System.out.println(eventDetailsDir);
-            // eventFile = new File("/dev/input/" + eventDir);
             eventFile = getHanderFile(eventDir);
             System.out.println(eventFile);
-            // System.out.println(eventFile);
+
             name = getDeviceName(eventDir);
             System.out.println(name);
 
-            // name = readFileLine(new File(eventDetailsDir.getPath() + "/name"));
 
 
         }
         
-
-        // for (int i = 0; i < lines.size(); i++) {
-        //     String line = lines.get(i).toLowerCase();
-
-
-        //     if (line.startsWith("i:")) {
-        //         id = getDeviceId(line);
-
-        //     } else if (line.startsWith("n")) {
-        //         name = getDeviceName(line);
-
-        //     } else if (line.startsWith("h")) {
-        //         eventFile = getHandlers(line);
-
-        //     } else if (line.startsWith("b: ev=")) {
-        //         possiableEventTypes = getPossibleEvents(line);
-
-        //     } else if (line.equals("")) {
-        //         devices.add(new InputDevice(
-        //             id,
-        //             name,
-        //             physicalPath,
-        //             systemFileSystem,
-        //             eventFile,
-        //             possiableEventTypes
-        //         ));                
-        //     }
-
-        // }
-
     }
 
     private static String[] getEventDirectories(File dirToFilter) {
@@ -159,22 +113,6 @@ public class KernalInputDevices {
         System.out.println(nameFile);
         return readFileLine(nameFile);
     }
-
-
-
-
-    // private static String getDeviceName(String line) {
-    //     String regex = "\"([^\"]*)\"";
-    //     Pattern pattern = Pattern.compile(regex);
-    //     Matcher matcher = pattern.matcher(line);
-
-    //     if (matcher.find()) {
-    //         return matcher.group(1);
-    //     }
-
-    //     return "";
-
-    // }
 
     // id methods
     private static int[] getDeviceId(String eventDirName) {
@@ -252,61 +190,6 @@ public class KernalInputDevices {
 
     }
 
-    
-    // private static EventTypes[] getPossibleEvents(String line) {
-    //     String regex = "(?<=ev=)[0-9]+";
-    //     Pattern pattern = Pattern.compile(regex);
-    //     Matcher matcher = pattern.matcher(line);
-        
-    //     if (!matcher.find()) {
-    //         return null;
-    //     }
-        
-    //     String ev = matcher.group(0);
-    //     // System.out.println(ev);
-        
-    //     int bitMap = 0;
-        
-    //     int bitShiftAmount = 0;
-        
-    //     int index = ev.length() - 1;
-        
-    //     while (index >= 0) {
-    //         int num = Character.digit(ev.charAt(index), 16);
-    //         bitMap |= (num << 4 * bitShiftAmount);
-            
-    //         index--;
-    //         bitShiftAmount++;
-            
-    //     }
-        
-    //     // System.out.println("BitMap: " + bitMap);
-    //     // String binaryString = Integer.toBinaryString(bitMap);
-    //     // String paddedBinaryString = String.format("%32s", binaryString).replaceAll(" ", "0");
-    //     // System.out.println("Padded binary string: " + paddedBinaryString);
-        
-    //     ArrayList<Integer> indices = new ArrayList<>();
-        
-    //     for (int i = 0; i < Integer.SIZE; i++) {
-    //         // System.out.println((bitMap & 1) == 1);
-    //         if ((bitMap & 1) == 1) {
-    //             indices.add(i);
-    //             // System.out.println("Index value: " + i);
-    //         }
-            
-    //         bitMap >>>= 1;
-            
-    //     }
-        
-    //     EventTypes[] possibleEvents = new EventTypes[indices.size()];
-        
-    //     for (int i = 0; i < indices.size(); i++) {
-    //         possibleEvents[i] = EventTypes.byValue(indices.get(i));
-    //     }
-        
-    //     return possibleEvents;
-    // }
-
     // utility methods
     private static ArrayList<Integer> getHexBitIndicies(String hex) {
         int bitMap = Integer.parseInt(hex, 16);
@@ -338,19 +221,5 @@ public class KernalInputDevices {
 
     }
 
-    // private static List<String> readDeviceList() {
-    //     try (BufferedReader reader = new BufferedReader(
-    //             new FileReader(INPUT_DEVICE_INFO)
-    //     )) {
-
-    //         return reader.lines().toList();
-
-    //     } catch (IOException error) {
-    //         System.out.println(INPUT_DEVICE_INFO + " cannnot be read");
-    //         return new ArrayList<>();
-
-    //     }
-
-    // }
 
 }
