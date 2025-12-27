@@ -1,7 +1,7 @@
 package devicemanagement;
 
 
-import eventclassification.EventCategory;
+// import eventclassification.EventCategory;
 import eventclassification.EventTypes;
 import eventclassification.eventcodes.EventCode;
 
@@ -9,16 +9,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
-import java.io.IOException;
-import java.text.FieldPosition;
+// import java.io.IOException;
+// import java.text.FieldPosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+// import java.util.List;
+// import java.util.regex.Matcher;
+// import java.util.regex.Pattern;
 
-import org.w3c.dom.events.Event;
 
 
 public class KernalInputDevices {
@@ -177,6 +176,7 @@ public class KernalInputDevices {
 
     // }
 
+    // id methods
     private static int[] getDeviceId(String eventDirName) {
         File idDir = new File(INPUT_DEVICE_DIR + "/" + eventDirName + "/device/id");
         int[] id = new int[4];
@@ -218,6 +218,8 @@ public class KernalInputDevices {
 
     }
 
+
+    // capability methods
     private static HashMap<EventTypes, EventCode[]> getCapabilities(String eventDirname) {
         return null;
     }
@@ -305,6 +307,7 @@ public class KernalInputDevices {
     //     return possibleEvents;
     // }
 
+    // utility methods
     private static ArrayList<Integer> getHexBitIndicies(String hex) {
         int bitMap = Integer.parseInt(hex, 16);
         
