@@ -11,6 +11,9 @@ public class Main {
 
         // int num = Key.TEMP.getValue();
 
+        KernalInputDevices.update();
+
+
         // Kernel input device class testing
         // KernalInputDevices list = new KernalInputDevices();
 
