@@ -1,5 +1,9 @@
 package devicemanagement;
 
+/**
+ * This class stores utility methods to convert a byte array into a long or 
+ * int
+ */
 public class ByteArrayConverson {
     public static int toInt(byte[] arr) {
         int num = 0;
