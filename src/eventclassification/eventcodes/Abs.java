@@ -32,10 +32,12 @@ public enum Abs implements EventCode {
 
     ABS_VOLUME(0x20),
     ABS_PROFILE(0x21),
+    ABS_SND_PROFILE(0x22),
 
     ABS_MISC(0x28),
 
     ABS_RESERVED(0x2e),
+
     ABS_MT_SLOT(0x2f),
     ABS_MT_TOUCH_MAJOR(0x30),
     ABS_MT_TOUCH_MINOR(0x31),

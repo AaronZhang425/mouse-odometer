@@ -7,7 +7,7 @@ import eventclassification.EventTypes;
 public enum Snd implements EventCode {
     SND_CLICK(0x00),
     SND_BELL(0x01),
-    SND_TONE(0x02);    
+    SND_TONE(0x02);
 
     private final int value;
     private static final HashMap<Integer, Snd> VALUE_MAP;
