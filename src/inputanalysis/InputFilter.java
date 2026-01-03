@@ -44,7 +44,10 @@ public class InputFilter implements Runnable {
 
     public EventData getData() {
         // place holder
-        return data.pollFirst();
+        synchronized(data) {
+            return data.pollFirst();
+            
+        }
         // return data.getFirst();
     }
 
@@ -72,6 +75,9 @@ public class InputFilter implements Runnable {
 
             if (filter.apply(eventData)) {
                 data.addLast(eventData);
+                // System.out.println(data.getLast());
+            } else {
+                data.add(new EventData());
             }
         }
 

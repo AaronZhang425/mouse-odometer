@@ -1,9 +1,5 @@
 package inputanalysis;
 
-import java.util.ArrayDeque;
-
-import org.w3c.dom.events.Event;
-
 import devicemanagement.EventData;
 import devicemanagement.InputReader;
 import devicemanagement.Mouse;
