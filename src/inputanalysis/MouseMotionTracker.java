@@ -79,12 +79,18 @@ public class MouseMotionTracker implements Runnable{
             // motionData[0][0] = xValues.getData();
 
             if (xValues.hasNext()) {
-                EventData xData = xValues.getData();
-                motionData[0][0] += getDisplacement(xData);
+                motionData[0][0] += getDisplacement(xValues.getData());
+                // EventData xData = xValues.getData();
                 // System.out.println(xData);
             }
+            
+            if (yValues.hasNext()) {
+                motionData[0][1] += getDisplacement(xValues.getData());
 
-            System.out.println(motionData[0][0]);
+            }
+
+            System.out.println("X displacement: " + motionData[0][0]);
+            System.out.println("Y displacement: " + motionData[0][1]);
             // if (xData != null) {
             //     motionData[0][0] += getDisplacement(xData);
 
