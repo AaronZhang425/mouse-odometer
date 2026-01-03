@@ -15,4 +15,16 @@ public record EventData (
         this(defaultTime, null, null, 0);
     }
 
+    public String toString() {
+        return (
+            "Input event info: " + "\n" +
+            "Seconds: " + time[0] + "\n" +
+            "Microseconds: " + time[1] + "\n" +
+            "Event type: " + eventType + "\n" +
+            "Event code: " + eventCode + "\n" +
+            "Value: " + value + "\n"
+        );
+
+    }
+
 }

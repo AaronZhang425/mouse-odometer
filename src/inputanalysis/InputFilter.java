@@ -9,7 +9,7 @@ import eventclassification.EventTypes;
 import eventclassification.eventcodes.EventCode;
 
 public class InputFilter implements Runnable {
-    private boolean stop = false;
+    private volatile boolean stop = false;
 
     private EventTypes eventType;
     private EventCode eventCode;
@@ -17,7 +17,7 @@ public class InputFilter implements Runnable {
 
     private Function<EventData, Boolean> filter;
 
-    private ArrayDeque<EventData> data = new ArrayDeque<>(8);
+    private volatile ArrayDeque<EventData> data = new ArrayDeque<>(16);
 
     public InputFilter(InputReader reader, EventTypes eventType, EventCode eventCode) {
         this.reader = reader;
@@ -44,7 +44,8 @@ public class InputFilter implements Runnable {
 
     public EventData getData() {
         // place holder
-        return data.getFirst();
+        return data.pollFirst();
+        // return data.getFirst();
     }
 
     private void configFilter() {
@@ -67,7 +68,8 @@ public class InputFilter implements Runnable {
     public void run() {
         while (!stop) {
             EventData eventData = reader.getEventData();
-            
+            // System.out.println(eventData);
+
             if (filter.apply(eventData)) {
                 data.addLast(eventData);
             }

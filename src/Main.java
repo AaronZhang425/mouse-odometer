@@ -28,8 +28,9 @@ public class Main {
         // ArrayList<InputDevice> filteredDeviceList = KernalInputDevices.getDevices(filter);
 
         Mouse mouse = new Mouse(filteredDeviceList.get(0), 1000);
-        MouseMotionTracker tracker = new MouseMotionTracker(mouse);
-        tracker.run();
+        Thread tracker = new Thread(new MouseMotionTracker(mouse));
+
+        tracker.start();
 
         // for (int i = 0; i < filteredDeviceList.size(); i++) {
         //     InputDevice device = filteredDeviceList.get(i);
