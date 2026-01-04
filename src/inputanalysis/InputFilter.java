@@ -43,7 +43,7 @@ public class InputFilter implements Runnable {
     }
 
     public boolean hasNext() {
-        return data.size() > 0;
+        return (data.size() > 0) && (data.peekFirst() != null);
     }
 
     public EventData getData() {

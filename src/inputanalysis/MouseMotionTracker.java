@@ -19,15 +19,6 @@ public class MouseMotionTracker implements Runnable{
     private final Thread xValuesThread;
     private final Thread yValuesThread;
 
-    // private final EventData[] xValues = new EventData[3];
-    // private final EventData[] yValues = new EventData[3];
-
-    // private final EventData[] xValues = {new EventData(), new EventData(), new EventData()};
-    // private final EventData[] yValues = {new EventData(), new EventData(), new EventData()};
-
-    // private final ArrayDeque<EventData> xValues = new ArrayDeque<>();
-    // private final ArrayDeque<EventData> yValues = new ArrayDeque<>();
-
     // outer: displacement, velocity, acceleration
     // inner: components of vector (x, y)
     private final double[][] motionData = new double[3][2];
@@ -73,73 +64,27 @@ public class MouseMotionTracker implements Runnable{
 
     @Override
     public void run() {
-        // TODO: Redo logic for sensing
-
         while (!stop) {
-            // motionData[0][0] = xValues.getData();
-
             if (xValues.hasNext()) {
-                motionData[0][0] += getDisplacement(xValues.getData());
-                // EventData xData = xValues.getData();
-                // System.out.println(xData);
+                EventData data = xValues.getData();
+                motionData[0][0] += getDisplacement(data);
+                
             }
             
             if (yValues.hasNext()) {
-                motionData[0][1] += getDisplacement(xValues.getData());
+                EventData data = yValues.getData();
+                motionData[0][1] += getDisplacement(data);
 
             }
 
             System.out.println("X displacement: " + motionData[0][0]);
             System.out.println("Y displacement: " + motionData[0][1]);
-            // if (xData != null) {
-            //     motionData[0][0] += getDisplacement(xData);
 
-            // }
-
-
-
-            // EventData yData = yValues.getData();
-        
-            // if (yData != null) {
-            //     motionData[0][1] += getDisplacement(yData);
-
-            // }
-
-
-
-            // System.out.println("X displacement: " + motionData[0][0]);
-            // System.out.println("Y displacement: " + motionData[0][1]);
-            // getData();
-        
-            // if (xValues.peekFirst() != null) {
-            //     motionData[0][0] += getDisplacement(xValues.pollFirst());
-            // }
-
-            // if (yValues.peekFirst() != null) {
-            //     motionData[0][1] += getDisplacement(yValues.pollFirst());
-            // }
-
-            // System.out.println("X displacement " + motionData[0][0]);
-            // System.out.println("Y displacement " + motionData[0][1]);
-            //     // update x displacement
-            //     motionData[0][0] += totalDisplacement(xValues.getData);
-            //     System.out.println("X displacement: " + motionData[0][0]);
-            //     // update y displacement
-            //     motionData[0][1] += totalDisplacement(yValues);
-            //     System.out.println("Y displacement: " + motionData[0][1]);
-            
-            //     System.out.println("X value 0: " + xValues[0].value());
-            //     System.out.println("X value 1: " + xValues[1].value());
-            //     System.out.println("X value 2: " + xValues[2].value());
-            
-            //     System.out.println("Y value 0: " + yValues[0].value());
-            //     System.out.println("Y value 1: " + yValues[1].value());
-            //     System.out.println("Y value 2: " + yValues[2].value());
             
         }
 
-        // xValues.terminate();
-        // yValues.terminate();
+        xValues.terminate();
+        yValues.terminate();
         
     }
     
@@ -245,79 +190,5 @@ public class MouseMotionTracker implements Runnable{
 
     }
 
-    // private void getData() {
-    //     EventData data = reader.getEventData();
-        
-    //     if (!data.eventType().equals(EventTypes.REL)) {
-    //         return;
-    //     }
-
-    //     if (data.eventCode().equals(Rel.REL_X)) {
-    //         // xValues[0] = xValues[1];
-    //         // xValues[1] = xValues[2];
-    //         // xValues[2] = data;
-    //         xValues.addLast(data);
-            
-    //     } else if (data.eventCode().equals(Rel.REL_Y)) {
-    //         // yValues[0] = yValues[1];
-    //         // yValues[1] = yValues[2];
-    //         // yValues[2] = data;
-    //         yValues.addLast(data);
-
-    //     }
-
-    // }
-
-    // private void getData() {
-    //     int foundXValues = 0;
-    //     int foundYValues = 0;
-
-    //     while (foundXValues < 3 || foundYValues < 3) {
-    //         EventData data = reader.getEventData();
-    //         printEventData(data);
-
-    //         if (!data.eventType().equals(EventTypes.REL)) {
-    //             continue;
-    //         }
-
-    //         if (data.eventCode().equals(Rel.REL_X)) {
-    //             foundXValues++;
-
-    //             xValues[0] = xValues[1];
-    //             xValues[1] = xValues[2];
-    //             xValues[2] = data;
-
-    //             // System.out.println("X value 0: " + xValues[0]);
-    //             // System.out.println("X value 1: " + xValues[1]);
-    //             // System.out.println("X value 0: " + xValues[2]);
-
-
-    //             continue;
-                
-    //         } else if (data.eventCode().equals(Rel.REL_Y)) {
-    //             foundYValues++;
-
-    //             yValues[0] = yValues[1];
-    //             yValues[1] = yValues[2];
-    //             yValues[2] = data;
-
-    //         }
-
-
-
-    //     }
-
-    // }
-
-    // private void printEventData(EventData data) {
-    //     System.out.println("Input event info: ");
-    //     System.out.println("Seconds: " + data.time()[0]);
-    //     System.out.println("Microseconds: " + data.time()[1]);
-    //     System.out.println("Event type: " + data.eventType());
-    //     System.out.println("Event code: " + data.eventCode());
-    //     System.out.println("Value: " + data.value());
-    //     System.out.println();
-
-    // }
 
 }

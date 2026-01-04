@@ -180,6 +180,16 @@ public class KernalInputDevices {
         return readFileLine(nameFile);
     }
 
+    // Todo: implement
+    private static File getPhysicalPath(String eventDirString) {
+        return null;
+    }
+
+    // Todo: implement
+    private static File getSystemFileSystem(String eventDirString) {
+        return null;
+    }
+
     // id methods
     private static int[] getDeviceId(String eventDirName) {
         File idDir = new File(INPUT_DEVICE_DIR + "/" + eventDirName + "/device/id");
