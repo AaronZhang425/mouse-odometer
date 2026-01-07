@@ -44,11 +44,11 @@ public class MouseMotionTracker implements Runnable{
     }
     
     
-    public MouseMotionTracker(Mouse mouse) {
-        double[] startPosition = {0, 0};
-        this(mouse, startPosition);
+    // public MouseMotionTracker(Mouse mouse) {
+    //     double[] startPosition = {0, 0};
+    //     this(mouse, startPosition);
 
-    }
+    // }
 
     public void terminate() {
         stop = false;
