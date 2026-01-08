@@ -1,11 +1,9 @@
 import devicemanagement.*;
-import inputanalysis.*;
 import eventclassification.*;
 import eventclassification.eventcodes.*;
-
+import inputanalysis.MouseMotionTracker;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Main {
 
@@ -27,6 +25,15 @@ public class Main {
 
         ArrayList<InputDevice> filteredDeviceList = KernalInputDevices.getDevices(fullCapabilitiesFilter);
         // ArrayList<InputDevice> filteredDeviceList = KernalInputDevices.getDevices(filter);
+
+        if (filteredDeviceList.size() == 0) {
+            System.exit(1);
+        }
+        
+        MouseMotionTracker mouseTracker = new MouseMotionTracker(new Mouse(filteredDeviceList.get(0), 1000));
+
+        Thread mouseThread = new Thread(mouseTracker);
+        mouseThread.start();
 
         // InputDevice deviceToUse = filteredDeviceList.get(0);
         // Mouse mouse = new Mouse(deviceToUse, 1000);
@@ -55,30 +62,6 @@ public class Main {
         //     for (EventTypes eventType : keySet) {
         //         System.out.println(eventType);
         //     }
-
-        // }
-
-
-        // int index = 8;
-
-        // KernalInputDevices.update();
-        // ArrayList<InputDevice> devices = KernalInputDevices.getDevices();
-        // HashMap<EventTypes, EventCode[]> capabilities = devices.get(index).capabilities();
-        // Set<EventTypes> keys = capabilities.keySet();
-
-        // System.out.println(devices.get(index).name());
-        // System.out.println(devices.get(index).handlerFile());
-
-        // for (EventTypes eventType : keys) {
-        //     System.out.println(eventType);
-            
-        //     EventCode[] eventCodes = capabilities.get(eventType);
-
-        //     for (EventCode eventCode : eventCodes) {
-        //         System.out.print(eventCode + " ");
-        //     }
-
-        //     System.out.println();
 
         // }
 
