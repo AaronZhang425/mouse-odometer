@@ -10,11 +10,6 @@ public record EventData (
     int value
 ) {
 
-    public EventData() {
-        long[] defaultTime = {0, 0};
-        this(defaultTime, null, null, 0);
-    }
-
     public String toString() {
         return (
             "Input event info: " + "\n" +
