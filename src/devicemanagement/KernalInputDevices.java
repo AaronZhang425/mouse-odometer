@@ -4,19 +4,15 @@ import eventclassification.EventTypes;
 import eventclassification.eventcodes.EventCode;
 import eventclassification.eventcodes.Rep;
 import eventclassification.eventcodes.Syn;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.w3c.dom.events.Event;
 
 
 
@@ -88,14 +84,19 @@ public class KernalInputDevices {
 
     // get devices with that have the event types listed in the parameters
     public static ArrayList<InputDevice> getDevices(Set<EventTypes> eventTypesFilter) {
+        // Arraylist to be filled with each device that is capable of at least
+        // all capabilities as specified by the parameter
         ArrayList<InputDevice> filtered = new ArrayList<>();
         
         for (InputDevice inputDevice : devices) {
+            // For every device, get the set of keys of the hashmap of
+            // capabilities
             Set<EventTypes> possibleEventTypes = (
                 inputDevice.capabilities().keySet()
             );
             
-
+            // If the key set contains all elements of the specified set
+            // of capable event types, add the device to the array list.
             if (possibleEventTypes.containsAll(eventTypesFilter)) {
                 filtered.add(inputDevice);
 
@@ -103,6 +104,7 @@ public class KernalInputDevices {
 
         }
 
+        // Return the filtered array list after each device has been evaluated
         return filtered;
     }
 
@@ -118,12 +120,14 @@ public class KernalInputDevices {
 
 
     public static ArrayList<InputDevice> getDevices() {
+        // Return a copy of arraylist to prevent external manipulation
         return new ArrayList<>(devices);
 
     }
 
     // update list of devices
     public static void update() {
+        // Clear arraylist to remove duplicate items being added
         devices.clear();
 
         int[] id = new int[4];
@@ -164,17 +168,18 @@ public class KernalInputDevices {
     private static String[] getEventDirectories(File dirToFilter) {
         // Get the files within the directory and only get subdirectoreis
         // of /sys/class/input that start with event followed by a number
-        String[] files = dirToFilter.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.toLowerCase().matches("event[0-9]+");
-
-            }
-        });
+        String[] files = dirToFilter.list((File dir, String name) -> name.toLowerCase().matches("event[0-9]+"));
 
         return files;
     }
 
+    /**
+     * Reads the name file of an event directory and returns its contents given
+     * the name of the event directory.
+     * 
+     * @param eventDirName Name of the event directory (e.g. event5)
+     * @return the name of device contained in the name file of the event
+     */
     private static String getDeviceName(String eventDirName) {
         File nameFile = new File(
             INPUT_DEVICE_DIR +
@@ -198,7 +203,15 @@ public class KernalInputDevices {
 
     // id methods
     private static int[] getDeviceId(String eventDirName) {
-        File idDir = new File(INPUT_DEVICE_DIR + "/" + eventDirName + "/device/id");
+        // Creates a file representing the file path of the id directory inside
+        // event directory
+        File idDir = new File(
+            INPUT_DEVICE_DIR +
+            "/" +
+            eventDirName +
+            "/device/id"
+        );
+        
         int[] id = new int[4];
 
         id[0] = getBus(idDir);
@@ -207,12 +220,15 @@ public class KernalInputDevices {
         id[3] = getVersion(idDir);
 
         return id;
+
     }
 
     private static int getBus(File idDir) {
         File busFile = new File(idDir + "/bustype");
         int busNum = Integer.parseInt(readFileLine(busFile), 16);
+
         return busNum;
+
     }
 
     private static int getVendor(File idDir) {
@@ -292,15 +308,19 @@ public class KernalInputDevices {
             eventTypeName
         );
         
+        // Put each hex number in an array
         String[] hexNums = readFileLine(eventCodeFile).split(" ");
         
-        ArrayList<Integer> bitIndicies = new ArrayList<>();;
+        ArrayList<Integer> bitIndicies = new ArrayList<>();
         
-        System.out.println(eventDirName);
+        // System.out.println(eventDirName);
 
+        // for each hex number
         for (int i = 0; i < hexNums.length; i++) {
+            // Get the bit indicies without of each hex number
             ArrayList<Integer> wordBitIndicies = getHexBitIndicies(hexNums[i]);
             
+            // Factor the index of the hex number to get true bit index value
             for (int j = 0; j < wordBitIndicies.size(); j++) {
                 int bitIndexValue = wordBitIndicies.get(j) + i * Long.SIZE;
                 wordBitIndicies.set(j, bitIndexValue);
@@ -319,7 +339,7 @@ public class KernalInputDevices {
 
         }
 
-        System.out.println(eventTypeName);
+        // System.out.println(eventTypeName);
         for (EventCode test: eventCodeCapabilities) {
             System.out.print(test + " ");
         }
@@ -382,9 +402,6 @@ public class KernalInputDevices {
         // the  1's place and index 1 being the 2's place of the binary number
         ArrayList<Integer> indicies = new ArrayList<>();
 
-
-        
-
         // This loop goes through a long and adds the positions in which a 
         // 1 is found in the binary number to the array list. After each check,
         // the index count increases (i in this case) and the number is shifted 
@@ -417,6 +434,7 @@ public class KernalInputDevices {
         } catch (Exception e) {
             System.out.println(e);
             return null;
+            
         }
 
 
